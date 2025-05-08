@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT Details ON

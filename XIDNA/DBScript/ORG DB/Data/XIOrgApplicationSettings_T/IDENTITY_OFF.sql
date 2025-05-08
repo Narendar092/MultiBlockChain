@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT XIOrgApplicationSettings_T OFF

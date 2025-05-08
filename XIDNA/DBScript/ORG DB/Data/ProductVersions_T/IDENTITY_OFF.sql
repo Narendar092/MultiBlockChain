@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT ProductVersions_T OFF

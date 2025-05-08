@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT RefTraceStage_T ON

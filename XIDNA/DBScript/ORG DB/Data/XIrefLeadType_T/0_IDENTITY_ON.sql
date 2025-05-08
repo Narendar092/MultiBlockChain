@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT XIrefLeadType_T ON

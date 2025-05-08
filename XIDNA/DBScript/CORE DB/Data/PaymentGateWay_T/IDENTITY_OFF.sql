@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT PaymentGateWay_T OFF

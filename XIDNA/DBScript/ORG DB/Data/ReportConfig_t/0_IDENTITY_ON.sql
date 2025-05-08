@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT ReportConfig_t ON

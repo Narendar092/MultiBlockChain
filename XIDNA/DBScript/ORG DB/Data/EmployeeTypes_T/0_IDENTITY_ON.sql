@@ -1,1 +1,0 @@
-SET IDENTITY_INSERT EmployeeTypes_T ON
