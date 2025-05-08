@@ -1,0 +1,62 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+
+@{
+    XIGraphData oXIGraph = new XIGraphData();
+    var sColour = new List<string>();
+    //int Colorsize = 0;
+    if (Model.oContent.ContainsKey(XIConstant.AM4PieChartComponent))
+    {
+        oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4PieChartComponent];
+        if (oXIGraph == null)
+        {
+            oXIGraph = new XIGraphData();
+        }
+        if (oXIGraph.sColours == null)
+        {
+            sColour = "#ffff00,#00ff00,#800000,#800080,#0000ff,#ffa500".Split(',').ToList();
+        }
+        else
+        {
+            sColour = oXIGraph.sColours;
+        }
+    }
+    var NewGUID = Guid.NewGuid();
+}
+<script>
+    $(document).ready(function () {
+        var jsonData = @Html.Raw(Json.Encode(oXIGraph));
+        var Color =@Html.Raw(Json.Encode(sColour));
+        fncDeviceAM4pieChart(jsonData, Color,"@NewGUID");
+    
+    });
+
+</script>
+@* <div class="col-md-12">
+    <div class="snippet-box-container">
+        <div style="text-align: right; padding: 15px; border: 15px;"><label>Last updated by:-<strong>@oXIGraph.sLastUpdated</strong></label></div>
+
+        <div class="PieChartGraph content-block">
+            <p class="chart-title">@oXIGraph.QueryName</p>
+            <div class="pull-right box-tools form-inline">
+
+            </div>
+            <div class="PieChartData">
+                <div id="AM4Piechart-@oXIGraph.sOneClickID"></div>
+            </div>
+        </div>
+
+    </div>
+</div> *@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@oXIGraph.QueryName</div>        
+        @*<div class="card-option">Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></div>*@
+    </div>
+    <div class="chart-container card-body">
+        <div id="AM4Piechart-@NewGUID-@oXIGraph.sOneClickID"></div>
+    </div>
+</div>

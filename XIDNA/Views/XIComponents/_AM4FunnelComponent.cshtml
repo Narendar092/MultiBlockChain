@@ -1,0 +1,144 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+
+@{
+    XIGraphData oXIGraph = new XIGraphData();
+    var sColour = new List<string>();
+    //int Colorsize = 0;
+    if (Model.oContent.ContainsKey(XIConstant.AM4FunnelChartComponent))
+    {
+        oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4FunnelChartComponent];
+        if (oXIGraph == null)
+        {
+            oXIGraph = new XIGraphData();
+        }
+        if (oXIGraph.sColours == null)
+        {
+            sColour = "#ffff00,#00ff00,#800000,#800080,#0000ff,#ffa500".Split(',').ToList();
+        }
+        else
+        {
+            sColour = oXIGraph.sColours;
+        }
+    }
+    string sGUID = Guid.NewGuid().ToString();
+}
+<script>
+    $(document).ready(function () {
+        // Set theme
+        //am4core.useTheme(am4themes_animated);
+        function am4themes_myTheme(target) {
+            if (target instanceof am4core.ColorSet) {
+                target.list = [
+                am4core.color("#dd576d")
+                ];
+            }
+        }
+        am4core.useTheme(am4themes_myTheme);
+        debugger;
+        var jsonData = @Html.Raw(Json.Encode(oXIGraph.FunnelData));
+
+            // Create a chart instance
+        var chart = am4core.create("am4funnelchart-@sGUID", am4charts.SlicedChart);
+            chart.hiddenState.properties.opacity = 0; // This line ensures the chart doesn't initially appear hidden.
+
+            // Create series
+        var series = chart.series.push(new am4charts.FunnelSeries());
+
+        series.colors.step = 2;
+            series.dataFields.value = "value";
+            series.dataFields.category = "label";
+        series.labels.template.text = "{label} {value.valueFormat}";
+            // Add data from your JSON variable
+            series.data = jsonData;
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "bottom";
+
+            chart.legend.labels.template.maxWidth = 350;
+            chart.legend.labels.template.truncate = true;
+            chart.legend.itemContainers.template.paddingTop = 5;
+            chart.legend.itemContainers.template.paddingBottom = 0;
+            var markerTemplate = chart.legend.markers.template;
+            markerTemplate.width = 10;
+        markerTemplate.height = 10;
+        series.slices.template.events.on("hit", function (ev) {
+            debugger
+            var sLabel = ev.target.dataItem._dataContext.label;
+            fncDrillDown(sLabel)
+        });
+
+    });
+
+    function fncDrillDown(sLabel) {
+        var s1Click = '@oXIGraph.sOneClickID';
+        var XILink = '@oXIGraph.RowXiLinkIDXIGUID';
+        if (sLabel == 'Sent') {
+            var InputParams = [];
+            var param1 = {};
+            param1["sName"] = '{XIP|1Click}';
+            param1["sValue"] = 'b9e22bdc-ab67-4e84-8d50-5335d41cdaed';
+            InputParams.push(param1);
+            XILinkLoadJson(XILink, null, InputParams)
+        }
+        else if (sLabel == 'Delivered') {
+            var InputParams = [];
+            var param1 = {};
+            param1["sName"] = '{XIP|1Click}';
+            param1["sValue"] = 'c229f53d-46d9-4c20-8f56-7608e868aa8c';
+            InputParams.push(param1);
+            XILinkLoadJson(XILink, null, InputParams)
+        }
+        else if (sLabel == 'Read') {
+            var InputParams = [];
+            var param1 = {};
+            param1["sName"] = '{XIP|1Click}';
+            param1["sValue"] = '6ffcb280-6154-46f9-bf3d-44dc5c7ebde6';
+            InputParams.push(param1);
+            XILinkLoadJson(XILink, null, InputParams)
+        }
+        else if (sLabel == 'SMS') {
+            var InputParams = [];
+            var param1 = {};
+            param1["sName"] = '{XIP|1Click}';
+            param1["sValue"] = '4e4a0840-2cf5-4035-9eec-087e95b33720';
+            InputParams.push(param1);
+            XILinkLoadJson(XILink, null, InputParams)
+        }
+        else if (sLabel == 'Reply') {
+            var InputParams = [];
+            var param1 = {};
+            param1["sName"] = '{XIP|1Click}';
+            param1["sValue"] = '14ebc77c-08d5-4d2e-8849-981b82b973c4';
+            InputParams.push(param1);
+            XILinkLoadJson(XILink, null, InputParams)
+        }
+    }
+</script>
+@* <div class="col-md-12">
+        <div class="snippet-box-container">
+            <div style="text-align: right"><label>Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></label></div>
+
+            <div class="PieChartGraph content-block">
+                <p class="chart-title">@oXIGraph.QueryName</p>
+                <div class="pull-right box-tools form-inline">
+
+                </div>
+                <div class="am4funnelchart">
+                    <div id="am4funnelchart-@oXIGraph.ReportID"></div>
+                </div>
+            </div>
+
+        </div>
+    </div> *@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@oXIGraph.QueryName</div>
+        <div class="card-option">Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></div>
+    </div>
+    <div class="chart-container card-body am4funnelchart-@sGUID">
+        <div id="am4funnelchart-@oXIGraph.ReportID"></div>
+    </div>
+</div>

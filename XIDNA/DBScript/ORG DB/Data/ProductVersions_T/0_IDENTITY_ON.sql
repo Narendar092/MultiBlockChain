@@ -1,0 +1,1 @@
+SET IDENTITY_INSERT ProductVersions_T ON

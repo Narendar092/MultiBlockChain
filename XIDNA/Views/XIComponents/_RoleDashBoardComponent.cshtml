@@ -1,0 +1,26 @@
+﻿@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    XILink oXiLink = new XILink();
+    XIDLayout layout = new XIDLayout();
+    oXiLink = (XILink)Model.oContent[XIConstant.RoleDashBoardComponent];
+    if (Model.oContent.ContainsKey(XIConstant.RoleDashBoardComponent))
+    {
+        layout = (XIDLayout)oXiLink.oContent["layout"];
+        layout.sNewGUID = oXiLink.sNewGUID;//Guid.NewGuid().ToString();
+    }
+
+}
+<div class="">
+    <div class="">
+        @{ 
+            Html.RenderAction("GetDialogContent", "XiLink", new { model = layout });
+        }
+    </div>
+   
+</div>
+
+
+

@@ -1,0 +1,42 @@
+IF OBJECT_ID('XINotifications_T', 'U') IS NOT NULL DROP TABLE dbo.XINotifications_T
+
+	
+CREATE TABLE [XINotifications_T]
+(
+	[ID] INT NOT NULL,
+	[sBOName] VARCHAR(50) NULL,
+	[FKiBOID] INT NULL,
+	[sAlertType] VARCHAR(50) NULL,
+	[sAlertMessage] VARCHAR(256) NULL,
+	[iUserID] INT NULL,
+	[iSentMail] INT NULL,
+	[FKiBODIDXIGUID] uniqueidentifier NULL,
+	[XIGUID] uniqueidentifier NOT NULL DEFAULT (newid()),
+	[XIDeleted] INT NOT NULL DEFAULT ((0)),
+	[XICreatedBy] VARCHAR(64) NOT NULL DEFAULT (''),
+	[XIUpdatedBy] VARCHAR(64) NOT NULL DEFAULT (''),
+	[XICreatedWhen] [datetime] NOT NULL DEFAULT (getdate()),
+	[XIUpdatedWhen] [datetime] NOT NULL DEFAULT (getdate()),
+	[iRoleID] INT NULL,
+	[iStatus] INT NOT NULL DEFAULT ((0)),
+	[FKiBOIID] int NULL,
+	[iInstanceIDXIGUID] uniqueidentifier NULL,
+	[FKiMasterNotificationID] int NULL,
+	[FKiMasterNotificationIDXIGUID] uniqueidentifier NULL,
+	[FKiOrgID] int NULL,
+	[sCode] nvarchar(50) NULL,
+	[FKiBoidXIGUID] uniqueidentifier NULL,
+	[iInstanceID] int NULL,
+	[dtSendWhen] datetime NULL,
+	[sSubject] nvarchar(1024) NULL,
+	[sNotes] nvarchar(2048) NULL,
+	[bIsSent] bit NULL,
+	[dSendWhen] datetime NULL,
+	[tSendWhen] nvarchar(100) NULL,
+	[sTheme] nvarchar(40) NULL,
+	[bIsSnoozed] bit NULL,
+	[iType] int NULL,
+	[iCategory] int NULL,
+	[iSendToUserID] int NULL,
+	[iSendToRoleID] int NULL
+)

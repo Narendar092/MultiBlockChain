@@ -1,0 +1,70 @@
+﻿@model XICore.XIIComponent
+@using XIDNA.Models
+@using XISystem
+@using XICore
+@{ 
+    List<XIInfraRoles> Roles = new List<XIInfraRoles>();
+    XIInfraUsers oUser = new XIInfraUsers();
+    RegisterViewModel User = new RegisterViewModel();
+    //List<XIDNA.ViewModels.VMDropDown> drpdwn = new List<XIDNA.ViewModels.VMDropDown>();
+    if (Model.oContent.ContainsKey(XIConstant.UserCreationComponent))
+    {
+        var MappingValues = Model.oContent[XIConstant.UserCreationComponent];
+        var Data = (Dictionary<string, object>)MappingValues;
+        foreach (var item in (Dictionary<string, object>)MappingValues)
+        {
+
+            if (item.Key == "Roles" && item.Value != null)
+            {
+                Roles = (List<XIInfraRoles>)item.Value;
+                //if (Roles.Count > 0)
+                //{
+                //    foreach (var item2 in Roles) {
+                //        var DropDown1 = new XIDNA.ViewModels.VMDropDown() { Expression = item2.RoleID.ToString(), text = item2.sRoleName } ;
+                //        drpdwn.Add(DropDown1);
+                //    }
+
+                //}
+            }
+            else if (item.Key == "User" && item.Value != null)
+            {
+                oUser = (XIInfraUsers)item.Value;
+                User = new RegisterViewModel() { FirstName = oUser.sFirstName, LastName = oUser.sLastName, PhoneNumber = oUser.sPhoneNumber, Locs = new List<string>(), DropDown = new List<XIDNA.ViewModels.VMDropDown>() { new XIDNA.ViewModels.VMDropDown() { Expression = "Lon", text="London" } }, Email = oUser.sEmail};
+            }
+        }
+    }
+    if(User.Id == 0)
+    {
+        User = new RegisterViewModel() { FirstName = oUser.sFirstName, LastName = oUser.sLastName, PhoneNumber = oUser.sPhoneNumber, Locs = new List<string>(), DropDown = new List<XIDNA.ViewModels.VMDropDown>() { new XIDNA.ViewModels.VMDropDown() { Expression = "Lon", text = "London" } }, Email = oUser.sEmail };
+    }
+}
+
+<section class="content-header hedr">
+    <h1> Add User </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> User Management</a></li>
+        <li class="active">Home</li>
+    </ol>
+</section>
+<div class="content">
+    <div class="row">
+        <div class="box padding10Tab">
+            <div class="innerborder">
+                <div class="box-body col-md-3" id="test2">
+                    <h5>Available Roles</h5>
+        <div id="UserMainTree" class="tree">
+            @Html.Partial("~/Views/Users/GroupTree.cshtml", Roles)
+                </div>
+                </div>
+                <div id="addClass" class="col-md-9">
+                    <div class="condata">
+                        <p>
+                            @Html.Partial("~/Views/Users/CreateEmployee.cshtml", User)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

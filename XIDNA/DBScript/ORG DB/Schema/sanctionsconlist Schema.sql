@@ -1,0 +1,43 @@
+IF OBJECT_ID('sanctionsconlist', 'U') IS NOT NULL DROP TABLE dbo.sanctionsconlist
+
+	
+CREATE TABLE [sanctionsconlist]
+(
+	[Name_6] NVARCHAR(255) NULL,
+	[Name_1] NVARCHAR(255) NULL,
+	[Name_2] NVARCHAR(255) NULL,
+	[Name_3] NVARCHAR(255) NULL,
+	[Name_4] NVARCHAR(255) NULL,
+	[Name_5] NVARCHAR(255) NULL,
+	[Title] NVARCHAR(255) NULL,
+	[DOB] NVARCHAR(255) NULL,
+	[Town_Of_Birth] NVARCHAR(255) NULL,
+	[Country_Of_Birth] NVARCHAR(255) NULL,
+	[Nationality] NVARCHAR(255) NULL,
+	[Passport_Details] NVARCHAR(MAX) NULL,
+	[NI_Number] NVARCHAR(255) NULL,
+	[Position] NVARCHAR(255) NULL,
+	[Address_1] NVARCHAR(255) NULL,
+	[Address_2] NVARCHAR(255) NULL,
+	[Address_3] NVARCHAR(255) NULL,
+	[Address_4] NVARCHAR(255) NULL,
+	[Address_5] NVARCHAR(255) NULL,
+	[Address_6] NVARCHAR(255) NULL,
+	[Post_Zip_Code] NVARCHAR(255) NULL,
+	[Country] NVARCHAR(255) NULL,
+	[Other_Information] NVARCHAR(MAX) NULL,
+	[Group_Type] NVARCHAR(255) NULL,
+	[Alias_Type] NVARCHAR(255) NULL,
+	[Regime] NVARCHAR(255) NULL,
+	[Listed_On] NVARCHAR(255) NULL,
+	[Last_Updated] NVARCHAR(255) NULL,
+	[Group_ID] NVARCHAR(255) NULL,
+	[ID] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[izXDeleted] INT NULL default((0)),
+	[XIGUID] UNIQUEIDENTIFIER not null default(newid()),
+	[XIDeleted] INT NOT NULL default((0)),
+	[XICreatedBy] VARCHAR(64) NOT NULL default(''),
+	[XIUpdatedBy] VARCHAR(64) NOT NULL default(''),
+	[XICreatedWhen] datetime NOT NULL default(getdate()),
+	[XIUpdatedWhen] datetime NOT NULL default(getdate())
+)

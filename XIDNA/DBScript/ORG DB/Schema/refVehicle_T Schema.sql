@@ -1,0 +1,43 @@
+IF OBJECT_ID('refVehicle_T', 'U') IS NOT NULL DROP TABLE dbo.refVehicle_T
+
+	
+CREATE TABLE [refVehicle_T]
+(
+	[id] INT NOT NULL,
+	[sName] VARCHAR(50) NULL,
+	[iStatus] INT NULL,
+	[izXDeleted] INT NULL,
+	[sNotes] VARCHAR(250) NULL,
+	[iType] INT NULL,
+	[FKiOrgID] INT NULL,
+	[enumMake] INT NULL,
+	[sModel] VARCHAR(50) NULL,
+	[iEngineSize] INT NULL,
+	[iDoors] INT NULL,
+	[iSeats] INT NULL,
+	[iFuelType] INT NULL,
+	[sTransmission] VARCHAR(50) NULL,
+	[sYear] VARCHAR(50) NULL,
+	[zXCrtdBy] VARCHAR(15) NULL,
+	[zXCrtdWhn] datetime NULL,
+	[zXUpdtdBy] VARCHAR(15) NULL,
+	[zXUpdtdWhn] datetime NULL,
+	[sSeries] VARCHAR(50) NULL,
+	[sDoorsBodyType] VARCHAR(50) NULL,
+	[sABICode] VARCHAR(50) NULL,
+	[sAdvisedInsGp] VARCHAR(50) NULL,
+	[sSecurity] VARCHAR(50) NULL,
+	[sBodyType] VARCHAR(50) NULL,
+	[zVehicleWeight] float NULL,
+	[zCarryingCapacity] float NULL,
+	[sOther1] VARCHAR(50) NULL,
+	[sOther2] VARCHAR(50) NULL,
+	[sOther3] VARCHAR(50) NULL,
+	[dExpiryDate] datetime NULL,
+	[XIGUID] UNIQUEIDENTIFIER not null default(newid()),
+	[XIDeleted] INT NOT NULL default((0)),
+	[XICreatedBy] VARCHAR(64) NOT NULL default(''),
+	[XIUpdatedBy] VARCHAR(64) NOT NULL default(''),
+	[XICreatedWhen] datetime NOT NULL default(getdate()),
+	[XIUpdatedWhen] datetime NOT NULL default(getdate())
+)

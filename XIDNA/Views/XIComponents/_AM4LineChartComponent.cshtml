@@ -1,0 +1,87 @@
+﻿@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    XIGraphData oXIGraph = new XIGraphData();
+    List<XIIBO> values = new List<XIIBO>();
+    List<string> Keys = new List<string>();
+    List<XIVisualisationNV> oXIVisualisations = new List<XIVisualisationNV>();
+    oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4LineChartComponent];
+    var KeyPairs = new List<Dictionary<string, string>>();
+    var colours = new List<string>();
+    var Fontsize = string.Empty;
+    var BarTypes = string.Empty;
+    var BarAxis = string.Empty;
+    if (Model.oContent.ContainsKey(XIConstant.AM4LineChartComponent))
+    {
+        Dictionary<List<string>, List<XIIBO>> OneClickRes = new Dictionary<List<string>, List<XIIBO>>();
+        if (Model.oContent.Count() != 0)
+        {
+            OneClickRes = oXIGraph.ComOneClick;
+            values = OneClickRes.Select(s => s.Value).FirstOrDefault();
+            Keys = OneClickRes.Select(s => s.Key).FirstOrDefault();
+            oXIVisualisations = oXIGraph.oXIVisualisations;
+            KeyPairs = oXIGraph.KeyPairs;
+        }
+        if (oXIVisualisations != null)
+        {
+            // colours = oXIVisualisations.Where(s => s.sName == "BarColours").Select(s => s.sValue).FirstOrDefault();
+            BarTypes = oXIVisualisations.Where(s => s.sName == "BarTypes").Select(s => s.sValue).FirstOrDefault();
+            BarAxis = oXIVisualisations.Where(s => s.sName == "BarAxis").Select(s => s.sValue).FirstOrDefault();
+        }
+        if (oXIGraph.sColours == null)
+        {
+            colours = "#ffff00,#00ff00,#800000,#800080,#0000ff,#ffa500".Split(',').ToList();
+        }
+        else
+        {
+            colours = oXIGraph.sColours;
+        }
+        if (string.IsNullOrEmpty(BarTypes))
+        {
+            BarTypes = "bar,bar,bar";
+        }
+        if (BarAxis.ToLower() == "datetime")
+        {
+            BarAxis = "timeseries";
+        }
+        else if (string.IsNullOrEmpty(BarAxis))
+        {
+            BarAxis = "category";
+        }
+    }
+    var NewGUID = Guid.NewGuid();
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@oXIGraph.QueryName</div>        
+        @*<div class="card-option">Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></div>*@
+    </div>
+    <div class="chart-container card-body">
+        <div id="AM4LineChart-@NewGUID-@oXIGraph.sOneClickID"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //debugger;
+        var JsonData=@Html.Raw(Json.Encode(KeyPairs));
+        var colours=@Html.Raw(Json.Encode(colours));
+        JsonData.BarTypes='@BarTypes';
+        JsonData.BarAxis='@BarAxis';
+        JsonData.OneClick='@oXIGraph.sOneClickID';
+        JsonData.RowXilinkID = '@oXIGraph.RowXilinkID';
+        JsonData.Count = '@oXIGraph.Count';
+        JsonData.bToolTip = '@oXIGraph.bToolTip';
+        JsonData.bIsGridLine = '@oXIGraph.bGridLines';
+        JsonData.bIsCursor = '@oXIGraph.bIsCursor';
+        JsonData.bIsLegends = '@oXIGraph.bIsLegends';
+        JsonData.sLegendPosition = '@oXIGraph.sLegendPosition';
+        var Keys =@Html.Raw(Json.Encode(Keys));
+
+        fncDeviceAM4LineChart(JsonData, Keys, colours,"@NewGUID");
+    });
+
+</script>
+

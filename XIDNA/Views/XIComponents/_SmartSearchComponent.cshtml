@@ -1,0 +1,248 @@
+﻿@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using XIDNA
+@{
+    string PhysicalPath = System.Configuration.ConfigurationManager.AppSettings["SharedPath"];
+    List<CNV> oNVs = new List<CNV>();
+    Dictionary<string, object> Data = new Dictionary<string, object>();
+    string InstanceID = string.Empty;
+    string sLabel = string.Empty;
+    string sType = string.Empty;
+    string BODGuid = string.Empty;
+    string AttrDGuid = string.Empty;
+    string AttrName = string.Empty;
+    var NewsGUID = Guid.NewGuid().ToString();
+    if (Model.oContent.ContainsKey(XIConstant.SmartSearchComponent))
+    {
+        Data = (Dictionary<string, object>)Model.oContent[XIConstant.SmartSearchComponent];
+        if (Data.ContainsKey("NVs"))
+        {
+            oNVs = (List<CNV>)Data["NVs"];
+        }
+        if (Data.ContainsKey("InstanceID"))
+        {
+            InstanceID = (string)Data["InstanceID"];
+        }
+        if (Data.ContainsKey("Label"))
+        {
+            sLabel = (string)Data["Label"];
+        }
+        if (Data.ContainsKey("Type"))
+        {
+            sType = (string)Data["Type"];
+        }
+        if (Data.ContainsKey("BODGuid"))
+        {
+            BODGuid = (string)Data["BODGuid"];
+        }
+        if (Data.ContainsKey("AttrDGuid"))
+        {
+            AttrDGuid = (string)Data["AttrDGuid"];
+        }
+        if (Data.ContainsKey("AttrName"))
+        {
+            AttrName = (string)Data["AttrName"];
+        }
+        if (oNVs == null)
+        {
+            oNVs = new List<CNV>();
+        }
+    }
+}
+<div class="p5 col-md-12">
+    <div class="scroll_vh_100 form-container form-h label-3 wrap-8 wrap-fullwidth">
+        <div class="DlgStatusMessages"></div>
+        <div class="clearfix flex-head">
+            <h3 class="maintitle">Smart Search</h3>
+            @*<h3>@sLabel</h3>*@
+            <h3 data-iid="@InstanceID" id="InstanceID" style="display:none;">@InstanceID</h3>
+            <span class="sssuccessmsg"></span>
+        </div>
+        <div class="form-group">
+            <div class="wrap-width clearfix control-block">
+                <label class="form-label" for="object">Search for:</label>
+                <div class="form-input">
+                    <select class="form-control input-sm" id="SmartSearchDDL_@NewsGUID" name="object">
+                        <option>Please Select</option>
+                        @if (oNVs != null && oNVs.Count() > 0)
+                        {
+                            if (oNVs.Count() == 1)
+                            {
+                                <option selected disabled value="@oNVs.FirstOrDefault().sValue" data-type="@oNVs.FirstOrDefault().sType" data-pc="@oNVs.FirstOrDefault().sContext" data-popup="@oNVs.FirstOrDefault().sLabel">@oNVs.FirstOrDefault().sName</option>
+                            }
+                            else
+                            {
+                                foreach (var NV in oNVs)
+                                {
+                                    <option value="@NV.sValue" data-type="@NV.sType" data-pc="@NV.sContext" data-popup="@NV.sLabel">@NV.sName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="wrap-width clearfix control-block">
+                <label class="form-label" for="term">Search term:</label>
+                <div class="form-input">
+                    <input type="text" class="form-control input-large input-sm_@NewsGUID" placeholder="Search Here" data-identity="SelectedSmartSrchItems" data-type="smartsearch" onkeyup="fncgetautocomplete('', this, event, '@NewsGUID')" name="term">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label selected-object">Selected item:</label>
+            <span id="SelectedSmartSrch_@NewsGUID" class="danger" data-iid="">
+                - None selected -
+            </span>
+            <span id="SelectedSmartSrchItems_@NewsGUID" class="danger">
+            </span>
+            @*<a class="btn btn-theme fkload" onclick="fncLoadPopup()">*@
+                @*<i class="far fa-window-restore" aria-hidden="true"></i>*@
+            @*</a>*@
+        </div>
+        @*<button class="btn" id="AssignComm">Assign</button>*@
+        <button class="btn btn-theme btnQuote" id="Savedata_@NewsGUID">Save</button>
+    </div>
+</div>
+<div class="p5 col-md-12 smartsearch-dialog" id="@NewsGUID"></div>
+@*<div class="smartsearch-dialog"></div>*@
+<script>
+    $(document).ready(function()
+    {
+        $('#AssignComm').click(function () {
+            debugger
+            var _this = this;
+            if ('@sType' == 'Document') {
+                var Selected = $('#SelectedSmartSrchItems_@NewsGUID').find('span');
+                var iDs = [];
+                for (var i = 0; i < Selected.length; i++) {
+                    var iID = $(Selected[i]).attr('data-ins');
+                    iDs.push(iID);
+                }
+                var sDocIDs = "";
+                var ExistingDocs = $('#ImageID-@AttrDGuid-@InstanceID').val();
+                if (ExistingDocs && ExistingDocs.length > 0) {
+                    sDocIDs = ExistingDocs + "," + iDs.join(",");
+                }
+                else {
+                    sDocIDs = iDs.join(",");
+                }
+                $('#ImageID-@AttrDGuid-@InstanceID').val(sDocIDs);
+                if (iDs.length > 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Assign_DocumentsToInstance", "BusinessObjects")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ iBOIID: '@InstanceID', BODGuid: '@BODGuid', AttrDGuid:'@AttrDGuid', DocIDs: iDs }),
+                        cache: false,
+                        async: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data && data.length > 0) {
+                                for (var j = 0; j < data.length; j++) {
+                                    var sPath = '@PhysicalPath/' + data[j].Expression;
+                                    var sHTML = '<div class="form-group" id="dvImage_' + data[j].ID + '"><a href="' + sPath + '" target="_blank" type="application/pdf">' + data[j].text + '</a></div>';
+                                    sHTML = sHTML + '<div class=form-group id="dvImagePreview"><input type="button" value="Remove" id="RemoveImage-@InstanceID" name="Remove" onclick="removeFile(\'@AttrName\',null,this,\'' + data[j].text + '\',' + data[j].ID + ',\'@AttrDGuid\' )" /></div>'
+                                    $('#DocPreView-@AttrDGuid').append(sHTML);
+                                }
+                            }
+                            $(_this).closest('.dialog-box').dialog('close');
+                            $(_this).closest('.dialog-box').dialog('destroy').remove();
+                        },
+                        error: function (data) { }
+                    })
+                }
+            }
+            else
+            {
+            var GUID = fncGetGUIDFromHTMLTree('LayoutGUID', this);
+            var CommID = $('#InstanceID').attr('data-iid');
+                var BOIID = $('#SelectedSmartSrch').attr('data-iid');
+            var BO = $("#SmartSearchDDL_@NewsGUID :selected").attr('data-type');
+            var PCGUID = $("#SmartSearchDDL_@NewsGUID :selected").attr('data-pc');
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Execute_Algorithm", "BusinessObjects")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ CommID: CommID, BOIID: BOIID, BO: BO, PCGUID: PCGUID, sGUID: GUID }),
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    debugger
+                    if (data) {
+                        $('.LayoutCode_' + GUID).prepend($('<div class="StatusMessages"></div>'));
+                        var sMsg = "";
+                        for (var key in data) {
+                            if (key.toLowerCase().startsWith('error')) {
+                                sMsg = sMsg + '<div class="alert alert-danger">' + data[key] + '</div>';
+                            }
+                            else if (key.toLowerCase().startsWith('success')) {
+                                sMsg = sMsg + '<div class="alert alert-success">' + data[key] + '</div>';
+                            }
+                            else {
+                                sMsg = sMsg + '<div class="alert alert-success">' + data[key] + '</div>';
+                            }
+                        }
+                        $('.LayoutCode_' + GUID).find('.StatusMessages').html(sMsg);
+                    }
+                }
+            });
+        }
+        })
+    })
+        $(document).ready(function()
+    {
+        $('#Savedata_@NewsGUID').click(function () {
+            debugger
+                var _this = this;
+                var Selected = $('#SelectedSmartSrchItems_@NewsGUID').find('span');
+                var iDs = [];
+                var GUID = fncGetGUIDFromHTMLTree('LayoutGUID', this);
+                for (var i = 0; i < Selected.length; i++) {
+                    var iID = $(Selected[i]).attr('data-ins');
+                    iDs.push(iID);
+                }
+                var sDocIDs = "";
+                var ExistingDocs = $('#ImageID-@AttrDGuid-@InstanceID').val();
+                if (ExistingDocs && ExistingDocs.length > 0) {
+                    sDocIDs = ExistingDocs + "," + iDs.join(",");
+                }
+                else {
+                    sDocIDs = iDs.join(",");
+                }
+                $('#ImageID-@AttrDGuid-@InstanceID').val(sDocIDs);
+                if (iDs.length > 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("LeadLinkSaving", "BusinessObjects")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ iBOIID: '@InstanceID', BODGuid: '@BODGuid', AttrDGuid:'@AttrDGuid', DocIDs: iDs }),
+                        cache: false,
+                        async: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data) {
+                                $('.LayoutCode_' + GUID).prepend($('<div class="StatusMessages"></div>'));
+                                var sMsg = "";
+                                sMsg = sMsg + '<div class="alert alert-success">' + data + '</div>';
+                                $('.LayoutCode_' + GUID).find('.StatusMessages').html(sMsg);
+                            }
+                        },
+                        error: function (data) { }
+                    })
+                }
+        })
+    })
+
+    function fncLoadPopup() {
+        debugger
+        var BOIID = $('#SelectedSmartSrch_@NewsGUID').attr('data-iid');
+        var iPopupID = $("#SmartSearchDDL_@NewsGUID :selected").attr('data-popup');
+        var BO = $("#SmartSearchDDL_@NewsGUID :selected").attr('data-type');
+        fncXILinkLoad(iPopupID, BOIID, BO)
+    }
+</script>

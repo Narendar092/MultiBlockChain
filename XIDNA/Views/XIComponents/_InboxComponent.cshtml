@@ -1,0 +1,357 @@
+﻿@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using XIDNA
+@{
+    List<XICore.XIDInbox> oInbox = new List<XICore.XIDInbox>();
+    if (Model.oContent.ContainsKey(XIConstant.InboxComponent))
+    {
+        oInbox = (List<XICore.XIDInbox>)Model.oContent[XIConstant.InboxComponent];
+        if (oInbox == null)
+        {
+            oInbox = new List<XICore.XIDInbox>();
+        }
+    }
+}
+<script>
+    $(document).ready(function () {
+        $('#1ClicksInboxTree').jstree({
+            "core": {
+                "themes": {
+                    "icons": false
+                },
+                "check_callback": function (op, node, par, pos, more) {
+                    if (op === "delete_node") {
+                        return confirm("Are you sure you want to delete?");
+                    }
+                }
+            },
+            "plugins": [
+                "themes", "html_data", "ui"
+               //"themes", "html_data", "ui", "state"
+            ],
+        });
+        //if ($('#1ClicksInboxTree a').hasClass('jstree-clicked')) {
+        //    $(this).parent().addClass('active-jstree');
+        //}
+        $('#1ClicksInboxTree').on('click', 'a', function () {
+            var Name = $(this).text();
+            var ResultIn = $(this).attr('data-ResultIn');
+            var Ptype = $(this).attr('data-ptype');
+            var Pleft = $(this).attr('data-pleft');
+            var Ptop = $(this).attr('data-ptop');
+            var Pwidth = $(this).attr('data-pwidth');
+            var Pheight = $(this).attr('data-pheight');
+            var My1 = $(this).attr('data-my1');
+            var My2 = $(this).attr('data-my2');
+            var At1 = $(this).attr('data-at1');
+            var At2 = $(this).attr('data-at2');
+            var ID = $(this).attr('id');
+
+
+            var OutputType = "";
+            if (ResultIn == "Inline" || ResultIn == 'null') {
+                OutputType = null;
+            }
+            else if (ResultIn == "Dialog") {
+                OutputType = "Dialog";
+            }
+            else {
+                OutputType = "Popup";
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ReportResult", "Inbox")',
+                data: { QueryID: ID, PageIndex: 1, ResultIn: OutputType },
+                cache: false,
+                async: true,
+                dataType: 'html',
+                @*beforeSend: function (request) {
+                    $.blockUI({ message: '<h3 class="nh3"><img src="@PhysicalPath/Scripts/ckfinder/plugins/gallery/colorbox/images/loading.gif" width="50px" /> Please wait while loading...</h3>' });
+                },*@
+                success: function (data) {
+                    $.unblockUI();
+                    if (ResultIn == "Inline" || ResultIn == 'null') {
+                        $('.content-wrapper').html(data);
+                    }
+                    else if (ResultIn == "Popup") {
+                        var win;
+                        if (Ptype == "Default") {
+                            win = window.open('', '_blank', "scrollbars=1,resizable=1,width=" + screen.width + ", height=" + screen.height);
+                        }
+                        else if (Ptype == "Max" || Ptype == "Medium" || Ptype == "Small") {
+                            win = window.open('', '_blank', "scrollbars=1,resizable=1,width=" + Pwidth + ", height=" + Pheight);
+                        }
+                        else if (Ptype == "Specific") {
+                            win = window.open('', '_blank', "scrollbars=1,resizable=1,width=" + Pwidth + ", height=" + Pheight + ", left=" + Pleft + ",top=" + Ptop);
+                        }
+                        with (win.document) {
+                            open();
+                            write(data);
+                            close();
+                        }
+                    }
+                    else if (ResultIn == "Dialog") {
+                        var my = "";
+                        var at = "";
+                        var width = 300;
+                        var height = 400;
+                        if (Ptype == "Specific") {
+                            my = My1 + " " + My2;
+                            at = At1 + " " + At2;
+                            width = Pwidth;
+                            height = Pheight;
+                        }
+                        else {
+                            my = Ptype;
+                            at = Ptype;
+                        }
+                        var DialogID = "ResultDialog-" + ID;
+                        $('.' + DialogID).dialog('destroy').remove();
+                        AddDialogToTaskbar(DialogID);
+                        var Div = '<div class="dialog-box ' + DialogID + '" title="Confirm Message" data-dname="' + DialogID + '" style="background-color:white;"></div>';
+                        $('#Dialogs').append(Div);
+                        $("." + DialogID).html(data);
+                        $("." + DialogID).dialog({
+                            title: ' ',
+                            height: height,
+                            width: width,
+                            position: { my: my, at: at, of: "body" },
+                            buttons: [
+                            //{
+                            //    text: "Ok",
+                            //    click: function () {
+                            //        $(this).dialog('destroy').remove()
+                            //        $("." + DialogID).remove();
+                            //    }
+                            //}
+                            ],
+                            close: function (event, ui) {
+                                $('.' + DialogID).parent().hide();
+                                $('button[data-name="' + DialogID + '"]').attr('data-status', 'close');
+                            }
+                        });
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("SaveUserDialog", "XiLink")',
+                            data: { QueryID: ID },
+                            cache: false,
+                            async: true,
+                            dataType: 'json',
+                            success: function (data) {
+                                $.unblockUI();
+                            }
+                        });
+                    }
+                }
+            });
+        });
+        //$(document.body).on('click', '.ui-dialog-titlebar-close', function () {
+        //    var dName = $(this).closest('div').find('.dialog-box').attr('data-dname');
+        //});
+        $('#DialogTaskbar').on('click', 'button.dialogtaskbarbtn', function () {
+            var name = $(this).attr('data-name');
+            var status = $(this).attr('data-status');
+            if (status == "open") {
+                $('.' + name).parent().hide();
+                $(this).attr('data-status', 'close');
+            }
+            else {
+                $('.' + name).parent().show();
+                $(this).attr('data-status', 'open');
+            }
+        });
+        $('#1CInboxTree12').on('click', 'a', function () {
+            var XiLinkID = $(this).attr('data-xilinkid');
+            var InputParams = [];
+            var param = {};
+            param["sName"] = 'sType';
+            param["sValue"] = 'Menu';
+            InputParams.push(param);
+            var MenuName = $(this).attr('data-mname');
+            if (XiLinkID && XiLinkID > 0) {
+                XILinkLoadJson(XiLinkID, null, InputParams, MenuName);
+            }
+            //var ActionType = $(this).attr('data-action');
+            //if (XiLinkID > 0) {
+            //    if (ActionType == 30) {
+
+            //    }
+            //    else {
+            //        XIRun(XiLinkID, 0, null, null, false, 0);
+            //    }
+            //}
+        });
+    });
+
+    function fncLoadInbox(_this) {
+        debugger;
+        var XiLinkID = $(_this).attr('data-xilinkid');
+        var InputParams = [];
+        var param = {};
+        param["sName"] = 'sType';
+        param["sValue"] = 'Menu';
+        InputParams.push(param);
+        var MenuName = $(_this).attr('data-mname');
+        if (XiLinkID != null && MenuName != undefined) {
+            XILinkLoadJson(XiLinkID, null, InputParams, MenuName);
+        } else if (XiLinkID != null && MenuName === undefined) {
+            XILinkLoadJson(XiLinkID, null, InputParams, "");
+        }
+
+        //var ActionType = $(this).attr('data-action');
+        //if (XiLinkID > 0) {
+        //    if (ActionType == 30) {
+
+        //    }
+        //    else {
+        //        XIRun(XiLinkID, 0, null, null, false, 0);
+        //    }
+        //}
+    }
+</script>
+
+<div class="right-controller">
+    @*  class="inboxtree" *@
+    @TreeView(oInbox)
+    @helper TreeView(IEnumerable<XICore.XIDInbox> nodes)
+    {
+
+        <div class="inbox-menu">
+            <div class="menu-title">
+                Inbox
+                <div class="options">
+                    <span class="option-item toggle-btn fa fa-minus" data-toggle="collapse" data-target="#inbox_content"></span>
+                    <span class="option-item inbox-close fa fa-times"></span>
+                </div>
+            </div>
+            <div class="inbox-content collapse in" id="inbox_content">
+                <ul class="inbox-items">
+                    @foreach (var node in nodes)
+                    {
+                        if (node.FKiXILinkIDXIGUID != null && node.FKiXILinkIDXIGUID != Guid.Empty.ToString())
+                        {
+                            @* <li class="inbox-item info-inbox">
+                                <a href="#"> *@
+                            <li class="inbox-item" onclick="fncLoadInbox(this)" data-xilinkid="@node.FKiXILinkIDXIGUID" id="Menu-@node.ID" data-refreshing="@node.iRefreshingType" data-timeInterval="@node.iSetinterval" data-1Click="@node.FKi1ClickIDXIGUID">
+                                @if (Convert.ToDecimal(node.InboxCount) <= node.rRTagetcolor)
+                                {
+                                    <div class="inbox-content danger-inbox">
+                                        <div class="inbox-value" id="InboxCount-@node.ID">@node.InboxCount</div>
+                                        <div class="inbox-status">@node.Name</div>
+                                    </div>
+                                }
+                                else if (Convert.ToDecimal(node.InboxCount) >= node.rRTagetcolor && Convert.ToDecimal(node.InboxCount) <= node.rATagetcolor)
+                                {
+                                    <div class="inbox-content warning-inbox">
+                                        <div class="inbox-value" id="InboxCount-@node.ID">@node.InboxCount</div>
+                                        <div class="inbox-status">@node.Name</div>
+                                    </div>
+                                }
+                                else if (Convert.ToDecimal(node.InboxCount) >= node.rATagetcolor)
+                                {
+                                    <div class="inbox-content success-inbox">
+                                        <div class="inbox-value" id="InboxCount-@node.ID">@node.InboxCount</div>
+                                        <div class="inbox-status">@node.Name</div>
+                                    </div>
+                                }
+
+                                <script>
+                                        $(document).ready(function () {
+                                            try {
+                                            var Refreshinytype = parseInt($(this).find("#Menu-@node.ID").attr('data-refreshing'));
+                                            var TimeInterval = parseInt($(this).find("#Menu-@node.ID").attr('data-timeInterval'));
+                                            var o1ClickID = $(this).find("#Menu-@node.ID").attr('data-1Click');
+                                            if (TimeInterval > 0 && Refreshinytype == 30) {
+
+                                                    setInterval(function () {
+                                                        //XILinkLoadJson(XiLinkID, null, InputParams, "");
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            contentType: 'application/json; charset=utf-8',
+                                                            url: '@Url.Action("AutoRefereshing", "XiLink")',
+                                                            datatype: 'json',
+                                                            cache: false,
+                                                            async: true,
+                                                            data: JSON.stringify({ i1ClickID: o1ClickID }),
+                                                            success: function (data) {
+                                                                $("#InboxCount-@node.ID").html(data);
+                                                                //$(".danger-inbox").addClass("highlight");
+                                                                setTimeout(function () {
+                                                                    $("#Menu-@node.ID .inbox-content").addClass('highlight');
+                                                                }, 500);
+
+                                                                setTimeout(function () {
+                                                                    $("#Menu-@node.ID .inbox-content").removeClass('highlight');
+                                                                }, 5000);
+                                                            }
+
+                                                        });
+
+                                                    }, TimeInterval);
+                                            }
+                                            if (Refreshinytype == 20) {
+                                                    console.log("Inbox  is calling node id is: @node.ID");
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        url: '@Url.Action("InboxResult", "XiSignalR")',
+                                                        datatype: 'json',
+                                                        cache: false,
+                                                        async: true,
+                                                        data: JSON.stringify({ i1ClickID: o1ClickID, NodeID:@node.ID }),
+                                                        success: function (data) {
+                                                            $("#InboxCount-@node.ID").html(data);
+                                                        }
+
+                                                    });
+
+                                                }
+                                                }
+                                                catch (err)
+                                                {
+                                                    console.error("Error in inbox Refresh for node id: @node.ID" + err.message);
+                                                }
+                                        });
+                                </script>
+                            </li>
+                            @* </a>
+                                </li> *@
+
+
+                        }
+                        else
+                        {
+                            <li class="inbox-item info-inbox">
+                                <div class="inbox-value">@node.InboxCount</div>
+                                <div class="inbox-status">@node.Name</div>
+                            </li>
+                            @*<a href="#">@node.Name <i class="fa fa-angle-left pull-right"></i></a>*@
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+</div>
+<script>
+    var inboxtreeMenu = $(".inboxtree");
+    var inboxtreeBtns = $("<div class='inboxtreeBtn'>Inbox <i class='fa fa-bars'></i></div>");
+
+    $(inboxtreeMenu).each(function () {
+        if ($(window).width() < 992) {
+            $(this).prepend(inboxtreeBtns);
+            $(this).parent('[data-name="Inbox"]').addClass('inboxToggle');
+        } else {
+            //$(this).remove(inboxtreeBtns);
+        }
+    });
+
+    $(".inboxtreeBtn").on('click', function () {
+        $(this).toggleClass("active");
+        $(this).next().toggleClass("inboxOpen");
+        $('.menuComponentBtn').next('.menuComponentOpen').removeClass("menuComponentOpen");
+        $('.menuComponentBtn').removeClass("active");
+    });
+</script>

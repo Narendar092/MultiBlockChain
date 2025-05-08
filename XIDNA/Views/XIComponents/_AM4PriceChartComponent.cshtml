@@ -1,0 +1,42 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+
+    XIGraphData oXIGraph = new XIGraphData();
+    Dictionary<string, string> values = new Dictionary<string, string>();
+    if (Model.oContent.ContainsKey(XIConstant.AM4PriceChartComponent))
+    {
+        oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4PriceChartComponent];
+
+        values = oXIGraph.OneClickRes;
+
+    }
+    var sTabGUID = Guid.NewGuid().ToString();
+}
+
+@if (Model.oContent.ContainsKey(XIConstant.AM4PriceChartComponent))
+{
+    @*<div style="text-align: center"><label>Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></label></div>*@
+    <!-- <div id="dashboardchart"> -->
+    <div class="snippet-box" id="dashboard-@oXIGraph.OnClickResultID">
+        <div class="snippet-content" id="OnClickResult-@sTabGUID" onclick="OnClickResult(@oXIGraph.RowXilinkID)">
+            @if (values !=null && values.Count() != 0)
+            {
+                <div class="head" id="value-@oXIGraph.OnClickResultID"><span>@values.Select(s => s.Value).FirstOrDefault()</span></div>
+                <div class="value" id="key-@oXIGraph.OnClickResultID"><span>@values.Select(s => s.Key).FirstOrDefault()</span></div>
+            }
+        </div>
+    </div>
+    <!-- </div> -->
+}
+<script>
+    function OnClickResult(RowXilinkID) {
+        //debugger;
+        var sGUID = fncGetGUIDFromHTMLTree('LayoutGUID', this);
+        XILinkLoadJson(RowXilinkID, sGUID, null);
+    }
+
+</script>

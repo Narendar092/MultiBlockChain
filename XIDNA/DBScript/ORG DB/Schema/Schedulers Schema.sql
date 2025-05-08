@@ -1,0 +1,21 @@
+IF OBJECT_ID('Schedulers', 'U') IS NOT NULL DROP TABLE dbo.Schedulers
+
+	
+CREATE TABLE [Schedulers]
+(
+	[ID] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[OrganizationID] INT NULL,
+	[ReportID] INT NULL,
+	[UserID] INT NULL,
+	[Period] VARCHAR(32) NULL,
+	[Date] INT NULL,
+	[Day] VARCHAR(32) NULL,
+	[Time] VARCHAR(32) NULL,
+	[Type] VARCHAR(32) NULL,
+	[EmailTemplateID] INT NULL,
+	[SMSTemplateID] INT NULL,
+	[StatusTypeID] INT NULL,
+	[LastExecutedOn] datetime NULL,
+	[FKi1ClickIDXIGUID] UNIQUEIDENTIFIER NULL,
+	[XIGUID] UNIQUEIDENTIFIER NULL
+)

@@ -1,0 +1,1 @@
+SET IDENTITY_INSERT [MailConfig_T] OFF

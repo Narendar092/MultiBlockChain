@@ -1,0 +1,184 @@
+﻿@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    XIGraphData oXIGraph = new XIGraphData();
+    List<XIIBO> values = new List<XIIBO>();
+    List<string> Keys = new List<string>();
+    List<XIVisualisationNV> oXIVisualisations = new List<XIVisualisationNV>();
+    var sColour = new List<string>();
+    var KeyPairs = new List<Dictionary<string, string>>();
+    oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4ColumnBarChartComponent];
+    // int n = 0;
+    int forseries = 0;
+    if (Model.oContent.ContainsKey(XIConstant.AM4ColumnBarChartComponent))
+    {
+        Dictionary<List<string>, List<XIIBO>> OneClickRes = new Dictionary<List<string>, List<XIIBO>>();
+        if (Model.oContent.Count() != 0)
+        {
+            OneClickRes = oXIGraph.ComOneClick;
+            if (OneClickRes != null)
+            {
+                values = OneClickRes.Select(s => s.Value).FirstOrDefault();
+                Keys = OneClickRes.Select(s => s.Key).FirstOrDefault();
+                oXIVisualisations = oXIGraph.oXIVisualisations;
+                KeyPairs = oXIGraph.KeyPairs;
+            }
+            if (oXIGraph.sColours == null)
+            {
+                sColour = "#ffff00,#00ff00,#800000,#800080,#0000ff,#ffa500".Split(',').ToList();
+            }
+            else
+            {
+                sColour = oXIGraph.sColours;
+            }
+        }
+    }
+    var NewGUID = Guid.NewGuid();
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@oXIGraph.QueryName</div>        
+       @* <div class="card-option">Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></div>*@
+    </div>
+    <div class="chart-container card-body">
+        <div id="am4ColumnBarChart-@NewGUID-@oXIGraph.sOneClickID"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var JsonData=@Html.Raw(Json.Encode(values));
+        JsonData.OneClick='@oXIGraph.sOneClickID';
+        JsonData.RowXilinkID='@oXIGraph.RowXilinkID';
+        var Colour=@Html.Raw(Json.Encode(sColour));
+        JsonData.bToolTip = '@oXIGraph.bToolTip';
+        JsonData.bIsGridLine = '@oXIGraph.bGridLines';
+        JsonData.bIsCursor = '@oXIGraph.bIsCursor';
+        JsonData.bIsLegends = '@oXIGraph.bIsLegends';
+        JsonData.sLegendPosition = '@oXIGraph.sLegendPosition';
+        var Keys=@Html.Raw(Json.Encode(Keys));
+            //var dataProvider = [];
+            var oParams = [];
+            $.each(JsonData, function (i, item) {
+                var LeadCount = [];
+                if (item.Attributes != null) {
+                    $.each(Keys,function(m,BarKeys){
+                        LeadCount.push((item.Attributes[BarKeys].sValue));
+                    });
+                    var Param = {};
+                    $.each(LeadCount,function(BarValues,BarKeys){
+                        if(BarValues==0)
+                            Param["value"+BarValues] = BarKeys;
+                        else
+                            Param["value"+BarValues]=parseInt(BarKeys);
+                    });
+                    oParams.push(Param);
+                }
+            });
+            // Apply chart themes
+            am4core.useTheme(am4themes_animated);
+            //am4core.useTheme(am4themes_kelly);
+        var BarID = "am4ColumnBarChart-@NewGUID-" + JsonData.OneClick;
+            // Create chart instance
+            var chart = am4core.create(BarID, am4charts.XYChart);
+            // Add data
+            chart.data =oParams;//dataProvider;
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "value0";
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+        if (JsonData.bIsGridLine == "True") {
+            valueAxis.renderer.grid.template.disabled = false;
+            categoryAxis.renderer.grid.template.disabled = false;
+        }
+        else {
+            valueAxis.renderer.grid.template.disabled = true;
+            categoryAxis.renderer.grid.template.disabled = true;
+        }
+            k=1;
+            // Create series
+            var ResultData=oParams[0];
+        for (var key in ResultData) {
+                if (ResultData.hasOwnProperty(key)) {
+                    if(key!="value0"){
+                        var series="series";
+                        series=series+k;
+                        //   series = chart.series.push(new am4charts.ColumnSeries());
+                        series = chart.series.push(new am4charts.ColumnSeries());
+
+                        series.dataFields.valueX = "value"+k;
+                        series.dataFields.categoryY = "value0";
+                        series.name = Keys[k]; //"Sales";
+                        if (JsonData.bToolTip == "True") {
+                            series.tooltipText = "[#fff font-size: 10px]{name} in {valueX}:\n[/][#fff font-size: 10px]{categoryY}[/] [#fff]{additional}[/]";
+                        }
+                        else {
+                            series.tooltipText = false;
+                        }
+
+                        if(Colour.length>0){
+                            var columnTemplate ="columnTemplate"+k;
+                            columnTemplate = series.columns.template;
+                            if (JsonData.bToolTip == "True") {
+                                columnTemplate.tooltipText = "{categoryY}: {valueX}[/]";
+                            }
+                            columnTemplate.fillOpacity = .8;
+                            columnTemplate.strokeOpacity = 0;
+                            columnTemplate.fill = am4core.color(Colour[k-1]);
+                        }
+                        columnTemplate = series.columns.template.events.on("hit", (ev) => {
+                            // event.target is the clicked Slice
+                            var Searchtext = ev.target._dataItem.dataContext["value0"];
+                            var sRowXiLinkID = JsonData.RowXilinkID;
+                            var oParams = [];
+                            var Param = {};
+                            Param["sName"] = "{XIP|sStatusName}";
+                            //Param["sValue"] = listofdata;
+                            Param["sValue"] = Searchtext;
+                            oParams.push(Param);
+                            XILinkLoadJson(sRowXiLinkID, null, oParams, null);
+                        });
+                        //columnTemplate.adapter.add("fill", function(fill, target) {
+                        //    if (target.dataItem && (target.dataItem.valueX < 0)) {
+                        //        return am4core.color("#ff0000");
+                        //    }
+                        //    else {
+                        //        return fill;
+                        //    }
+                        //});
+
+                        // Add cursor
+                        //chart.cursor = new am4charts.XYCursor();
+                        k++;
+                    }
+                }
+            }
+        // Add cursor
+        if (JsonData.bIsCursor == "True") {
+            chart.cursor = new am4charts.XYCursor();
+        }
+        if (JsonData.bIsLegends == "True") {
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = JsonData.sLegendPosition;
+        }
+            
+            var cellSize = 50;
+            chart.events.on("datavalidated", function (ev) {
+                // Get objects of interest
+                var chart = ev.target;
+                //var categoryAxis = 1000;
+
+                // Calculate how we need to adjust chart height
+                var adjustHeight = chart.data.length * cellSize - 10;
+
+                // get current chart height
+                var targetHeight = chart.pixelHeight + adjustHeight;
+
+                // Set it on chart's container
+                chart.svgContainer.htmlElement.style.height = targetHeight + "px";
+            });
+    });
+</script>
+

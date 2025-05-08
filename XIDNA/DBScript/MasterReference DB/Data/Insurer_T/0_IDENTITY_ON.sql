@@ -1,0 +1,1 @@
+SET IDENTITY_INSERT Insurer_T ON

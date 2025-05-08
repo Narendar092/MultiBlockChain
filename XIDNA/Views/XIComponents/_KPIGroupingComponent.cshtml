@@ -1,0 +1,64 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    var oKPI = new Dictionary<string, List<XIDKPI>>();
+    if (Model.oContent.ContainsKey(XIConstant.KPIGroupingComponent))
+    {
+        oKPI = (Dictionary<string, List<XIDKPI>>)Model.oContent[XIConstant.KPIGroupingComponent];
+
+    }
+    XIDComponentParam Params = new XIDComponentParam();
+    var NewGUID = Guid.NewGuid();
+}
+<div class="one-layout-kpi mb-5">
+    @foreach (var item1 in oKPI)
+    {
+        <div class="">
+            @if (!string.IsNullOrEmpty(item1.Value.FirstOrDefault().sGroupTitle))
+            {
+                <h3 class="maintitle" id="KPImaintitle_@item1.Value.FirstOrDefault().XIGUID">@item1.Value.FirstOrDefault().sGroupTitle</h3>
+            }
+            @if (!string.IsNullOrEmpty(item1.Value.FirstOrDefault().sSubTitle))
+            {
+                <p class="small m-0 mt-1" style="font-size: 14px;" id="KPIsubtitle_@item1.Value.FirstOrDefault().XIGUID">@item1.Value.FirstOrDefault().sSubTitle</p>
+            }
+
+
+            <div class="row">
+                @foreach (var item in item1.Value)
+                {
+                    var DivSize = "col-md-12";
+                    if (item.iSize == 10)
+                    {
+                        DivSize = "col-md-4";
+                    }
+                    else if (item.iSize == 20)
+                    {
+                        DivSize = "col-md-6";
+                    }
+                    <div class="@DivSize">
+                        <div class="card kpi-card-card">
+                            @if (!string.IsNullOrEmpty(item.sKpiTitle))
+                            {
+                                <div class="card-header">
+                                    <div class="card-title" id="KPItitle_@item1.Value.FirstOrDefault().XIGUID">@item.sKpiTitle</div>
+                                </div>
+                            }
+                            @{
+                                XIIComponent oCompI = new XIIComponent();
+                                oCompI.oContent[XIConstant.KPIComponent] = item;
+                                Html.RenderPartial("~/Views/XIComponents/_KPIComponent.cshtml", oCompI);}
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+</div>
+
+
+
