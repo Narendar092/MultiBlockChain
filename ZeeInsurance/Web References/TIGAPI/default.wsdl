@@ -1,0 +1,3394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://cfsnetwork.co.uk" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="urn:PriceComparisonStandardsGroup/20160505/AddOns" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="https://cfsnetwork.co.uk" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Interface for Durell CFS custom schemes</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://cfsnetwork.co.uk">
+      <s:import namespace="urn:PriceComparisonStandardsGroup/20160505/AddOns" />
+      <s:element name="GetEventFeed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="DateType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventFeedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventFeedResult" type="tns:APIResponseOfListOfDataEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfDataEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfDataEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="APIResponseProfiling">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ItemsPerPage" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPage" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalRows" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPages" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeToExecute" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimePerRow" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogLines" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataEvent" nillable="true" type="tns:DataEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Identifier" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransactionIdentifier" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:PrimaryEventType" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentStage" type="tns:EventStageType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EDICounter" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Enrichments" type="tns:ArrayOfEnrichmentEventType" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnrichmentsLog" type="tns:ArrayOfEnrichmentEvent" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="tns:ArrayOfTag" />
+          <s:element minOccurs="0" maxOccurs="1" name="Endorsements" type="tns:ArrayOfEndorsement" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addons" type="tns:ArrayOfAddonEvent" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsurerData" type="tns:ArrayOfInsurerEvent" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LatestEventDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyEndDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyEndDateNoSeconds" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastQuoteInsurer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PreviousQuoteInsurer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Source" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceAPIKey" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuoteReference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyIsCancelled" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyCancellationUnderway" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyCancelledOn" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyCancelledFrom" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyCancellationReason" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPolicyRecord" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPolicyRecordExcMTA" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OriginalPolicyRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserRecord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdviserInitials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LeadInitials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormattedLastPremium" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuoteStageReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfDataEventField" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvailableActions" type="tns:ArrayOfDataItemLink" />
+          <s:element minOccurs="0" maxOccurs="1" name="PremiumHistory" type="tns:ArrayOfDataEventPremium" />
+          <s:element minOccurs="1" maxOccurs="1" name="Invoice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BrokerageFee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IPT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IPTPercentage" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IPTPercentageDec" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Gross" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Comm" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommPercentage" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Net" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PrimaryEventType">
+        <s:restriction base="s:string">
+          <s:enumeration value="NewBusiness" />
+          <s:enumeration value="MTA" />
+          <s:enumeration value="Renewal" />
+          <s:enumeration value="Cancellation" />
+          <s:enumeration value="Reinstate" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EventStageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Enquiry" />
+          <s:enumeration value="Accept" />
+          <s:enumeration value="Refer" />
+          <s:enumeration value="Decline" />
+          <s:enumeration value="TakeUp" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfEnrichmentEventType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EnrichmentEventType" type="tns:EnrichmentEventType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EnrichmentEventType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Bad" />
+          <s:enumeration value="ProspectCreated" />
+          <s:enumeration value="ClientCreated" />
+          <s:enumeration value="QuoteDownloaded" />
+          <s:enumeration value="Invited" />
+          <s:enumeration value="Dialled" />
+          <s:enumeration value="AddedNote" />
+          <s:enumeration value="AdviserAssigned" />
+          <s:enumeration value="Lapsed" />
+          <s:enumeration value="TopXInfoAdded" />
+          <s:enumeration value="DoNotRenew" />
+          <s:enumeration value="Duplicate" />
+          <s:enumeration value="TagAdded" />
+          <s:enumeration value="PurchaseHalted" />
+          <s:enumeration value="Notification" />
+          <s:enumeration value="SanctionsSearchMatch" />
+          <s:enumeration value="SanctionsSearchFail" />
+          <s:enumeration value="SMSInvited" />
+          <s:enumeration value="CancellationReasonChanged" />
+          <s:enumeration value="ReferOverrideRequested" />
+          <s:enumeration value="ReferOverrideRejected" />
+          <s:enumeration value="ReferOverrideAccepted" />
+          <s:enumeration value="ReferOverrideDeclined" />
+          <s:enumeration value="ReferOverrideCancelled" />
+          <s:enumeration value="AutomaticRefundFailed" />
+          <s:enumeration value="EDIDeliveredFTP" />
+          <s:enumeration value="EDIDeliveredEmail" />
+          <s:enumeration value="EDIDeliveredSQS" />
+          <s:enumeration value="RenewalReminderSent" />
+          <s:enumeration value="RenewalReminderFailed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfEnrichmentEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EnrichmentEvent" nillable="true" type="tns:EnrichmentEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EnrichmentEvent">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:EnrichmentEventType" />
+          <s:element minOccurs="1" maxOccurs="1" name="Timestamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTag">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Tag" nillable="true" type="tns:Tag" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Tag">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Timestamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEndorsement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Endorsement" nillable="true" type="tns:Endorsement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Endorsement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExcessAmount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAddonEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AddonEvent" nillable="true" type="tns:AddonEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddonEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddonId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInsurerEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InsurerEvent" nillable="true" type="tns:InsurerEvent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InsurerEvent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="InsurerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPremium" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossPremium" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IPT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Commission" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPremiumExclAddons" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GrossPremiumExclAddons" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IPTExclAddons" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommissionExclAddons" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataEventField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataEventField" nillable="true" type="tns:DataEventField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataEventField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Icon" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAdditional" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataItemLink">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataItemLink" nillable="true" type="tns:DataItemLink" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataItemLink">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsJavascript" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShowWhen" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataEventPremium">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataEventPremium" nillable="true" type="tns:DataEventPremium" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataEventPremium">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Timestamp" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Premium" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Insurer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MatrixName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="EventRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventResult" type="tns:APIResponseOfListOfDataEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventExport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExportFields" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExportTables" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowQuoteTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowEventTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowStageTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowTags" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="DateType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MustHaveEnrichments" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowInsurers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="MustNotHaveEnrichments" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AllowAddons" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventExportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventExportResult" type="tns:APIResponseOfListOfDataEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListRecords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfField" />
+            <s:element minOccurs="1" maxOccurs="1" name="IncludeDocuments" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="tns:Field" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Field">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnformattedValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Format" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldListItems" type="tns:ArrayOfFieldListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFieldListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FieldListItem" nillable="true" type="tns:FieldListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FieldListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListRecordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListRecordsResult" type="tns:APIResponseOfListOfDataItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfDataItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfDataItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataItem" nillable="true" type="tns:DataItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Stage" type="tns:QuoteStageType" />
+          <s:element minOccurs="1" maxOccurs="1" name="StageDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastQuotePrice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyRef" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentPolicyRecord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+          <s:element minOccurs="0" maxOccurs="1" name="Links" type="tns:ArrayOfDataItemLink" />
+          <s:element minOccurs="0" maxOccurs="1" name="Documents" type="tns:ArrayOfDocument" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemWarnings" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActualRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedCurrency" type="tns:SchemeCurrency" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyEndDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="QuoteStageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="QuoteOnly" />
+          <s:enumeration value="QuoteDownloaded" />
+          <s:enumeration value="PolicyDownloaded" />
+          <s:enumeration value="QuoteCompleteAccepted" />
+          <s:enumeration value="QuoteCompleteRefer" />
+          <s:enumeration value="QuoteCompleteDecline" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfDocument">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Document">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FolderID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Link" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DownloadLink" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Permalink" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Viewed" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastViewed" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreationDetails" type="tns:DocumentCreationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentCreationInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DocumentDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SchemeCurrency">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Symbol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Culture" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Conversion" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountSetNumber" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListArchivedRecords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ArrayOfField" />
+            <s:element minOccurs="1" maxOccurs="1" name="IncludeDocuments" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListArchivedRecordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListArchivedRecordsResult" type="tns:APIResponseOfListOfDataItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArchiveDataItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DataRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArchiveDataItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ArchiveDataItemResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfBoolean">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="1" maxOccurs="1" name="Response" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RestoreDataItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DataRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RestoreDataItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RestoreDataItemResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolicyData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Day" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExcludeAddons" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExcludeCancelled" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExcludeDeclined" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyStages" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyInsurers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyProducts" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyAdvisers" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyLeads" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShowEventTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShowTags" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="TagFromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TagToDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinGrossPremium" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxGrossPremium" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinIncome" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxIncome" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPolicyDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPolicyDataResult" type="tns:APIResponseOfListOfPolicyDataLine" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfPolicyDataLine">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfPolicyDataLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPolicyDataLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PolicyDataLine" nillable="true" type="tns:PolicyDataLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PolicyDataLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EventType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_OriginalPolicyNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClientID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Occupation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientPhone1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientPhoneWork1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientPhoneMobile1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientEmail2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reminder" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_Reference" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RenewalDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreatedDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TakeupDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_AdviserInitials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_LeadInitials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_InsurerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductSet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductSubSet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Product" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlanName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_Stage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Gross" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Comm" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Fee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_IPT" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_InsurerFee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Net" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Total" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_BrokerAdjust" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_Payaway" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_PaidBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_PayMethod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="p_SourceOfBiz" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="p_PremAndIPT" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Enrichments" type="tns:ArrayOfEnrichmentEvent" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="tns:ArrayOfTag" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLines" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressPostcode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GenerateToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateTokenResult" type="tns:APIResponseOfToken" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfToken">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:Token" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Token">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Expires" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TestTokenValidity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestTokenValidityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestTokenValidityResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceRenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceRenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProduceRenewalResult" type="tns:APIResponseOfQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfQuote">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:Quote" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Quote">
+        <s:annotation>
+          <s:appinfo>
+            <keepNamespaceDeclarations>xmlns</keepNamespaceDeclarations>
+          </s:appinfo>
+        </s:annotation>
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserAuthToken" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuoteOutput" type="tns:QuoteOutput" />
+          <s:element minOccurs="0" maxOccurs="1" name="OutputReason" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Premium" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Excesses" type="tns:ArrayOfExcess" />
+          <s:element minOccurs="0" maxOccurs="1" name="MonthlyPaymentOption" type="tns:MonthlyPaymentResponse" />
+          <s:element minOccurs="0" maxOccurs="1" name="Insurer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaqtoProductId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Underwriter" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Links" type="tns:QuoteLinks" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemWarnings" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" ref="s1:Addons" />
+          <s:element minOccurs="0" maxOccurs="1" name="Features" type="tns:ArrayOfSchemeInsurerFeature" />
+          <s:element minOccurs="0" maxOccurs="1" name="Documents" type="tns:ArrayOfDocument" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="QuoteOutput">
+        <s:restriction base="s:string">
+          <s:enumeration value="Accepted" />
+          <s:enumeration value="Declined" />
+          <s:enumeration value="Referred" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfExcess">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Excess" nillable="true" type="tns:Excess" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Excess">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PrePrinted" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompulsaryAmount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="VoluntaryAmount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalAmount" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MonthlyPaymentResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ActualLoanPremium" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MonthlyPayment" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="DepositAmount" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExternalDeposit" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Instalments" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalPayable" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="APR" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChargeForCredit" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GrossRate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SelectedSchemeCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FacilityFeeAmount" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CalculationBasis" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QuoteLinks">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Edit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ViewResults" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSchemeInsurerFeature">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SchemeInsurerFeature" nillable="true" type="tns:SchemeInsurerFeature" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SchemeInsurerFeature">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:SchemeInsurerFeatureType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExcludeFromResultsPage" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SchemeInsurerFeatureType">
+        <s:restriction base="s:string">
+          <s:enumeration value="TickBox" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="Figure" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ProduceRenewalWithDocuments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceRenewalWithDocumentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProduceRenewalWithDocumentsResult" type="tns:APIResponseOfQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceQuote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceQuoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProduceQuoteResult" type="tns:APIResponseOfQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceQuoteWithDocuments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProduceQuoteWithDocumentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProduceQuoteWithDocumentsResult" type="tns:APIResponseOfQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateQuote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateQuoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateQuoteResult" type="tns:APIResponseOfQuote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertQuote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertQuoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertQuoteResult" type="tns:APIResponseOfDataItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfDataItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:DataItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConvertRenewal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertRenewalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertRenewalResult" type="tns:APIResponseOfDataItem" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PopulateTopXInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteReference" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rank" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TopInsurer" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TopPrice" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PopulateTopXInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PopulateTopXInfoResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfString">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUnreadMessageCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InboxType" type="tns:InboxType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="InboxType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Inbox" />
+          <s:enumeration value="Sent" />
+          <s:enumeration value="DepartmentInbox" />
+          <s:enumeration value="DepartmentSent" />
+          <s:enumeration value="DefaultInbox" />
+          <s:enumeration value="DefaultSent" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetUnreadMessageCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUnreadMessageCountResult" type="tns:APIResponseOfInt32" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfInt32">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="1" maxOccurs="1" name="Response" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InboxType" type="tns:InboxType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesResult" type="tns:APIResponseOfListOfMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Message" nillable="true" type="tns:Message" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Record" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentRecord" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Override" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateSent" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Recipient" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecipientRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReplyTo" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SenderType" type="tns:SenderType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderDepartment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:Status" />
+          <s:element minOccurs="1" maxOccurs="1" name="StatusDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllowDelete" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllowReply" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentSnippet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LinkedFileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LinkedFileURL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ContentVerified" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Relationships" type="tns:MessageRelationship" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SenderType">
+        <s:restriction base="s:string">
+          <s:enumeration value="FromClientToBroker" />
+          <s:enumeration value="FromClientToContact" />
+          <s:enumeration value="FromBrokerToClient" />
+          <s:enumeration value="FromContactToClient" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Status">
+        <s:restriction base="s:string">
+          <s:enumeration value="Delivered" />
+          <s:enumeration value="Received" />
+          <s:enumeration value="Opened" />
+          <s:enumeration value="Replied" />
+          <s:enumeration value="Deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MessageRelationship">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="tns:MessageRelationshipType" />
+          <s:element minOccurs="1" maxOccurs="1" name="LinkRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LinkRef" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NoteRecord" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MessageRelationshipType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Account" />
+          <s:enumeration value="Policy" />
+          <s:enumeration value="Claim" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetMessageContent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InboxType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessageContentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessageContentResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkMessageUnread">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InboxType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarkMessageUnreadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MarkMessageUnreadResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InboxType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteMessageResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSecureMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_To" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SenderType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllowReply" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllowDelete" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="LinkedFile" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InReplyTo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSecureMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSecureMessageResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSecureMessageWithAttachment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="_To" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SenderType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllowReply" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="AllowDelete" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="LinkedFile" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="InReplyTo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AttachmentName" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="AttachmentData" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSecureMessageWithAttachmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSecureMessageWithAttachmentResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListDocuments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListDocumentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListDocumentsResult" type="tns:APIResponseOfListOfDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfDocument">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfDocument" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListDocumentsBySystemToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ListNewestDocsFirst" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListDocumentsBySystemTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListDocumentsBySystemTokenResult" type="tns:APIResponseOfListOfDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListPersonalData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListPersonalDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListPersonalDataResult" type="tns:APIResponseOfListOfEditableField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfEditableField">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfEditableField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEditableField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EditableField" nillable="true" type="tns:EditableField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EditableField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="oValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Locked" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvailableOptions" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdatePersonalData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Payload" type="tns:ArrayOfEditableField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePersonalDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePersonalDataResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrentPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditPasswordResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditDataProtection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ContactID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RelationID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ProtectionFlag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditDataProtectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditDataProtectionResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditUserSetting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SettingName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SettingValue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditUserSettingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EditUserSettingResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Legacy" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestPostcodeResult" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostcodeAcceptance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestPostcodeAcceptanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestPostcodeAcceptanceResult" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestAddressAcceptance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FullAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestAddressAcceptanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestAddressAcceptanceResult" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberMI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MemberIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MemberMIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MemberMIResult" type="tns:APIResponseOfListOfMember" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfMember">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfMember" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfMember">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Member" nillable="true" type="tns:Member" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Member">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceHomeJourneyStarted" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceHomeQuoteAttempted" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceHomeQuoteProvided" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceHomeTakenUp" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuranceHomeQuotePremium" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TESTMemberMI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TESTMemberMIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TESTMemberMIResult" type="tns:APIResponseOfListOfMember" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChurchillsInterface">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserRecord" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="SiteAccessToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfField" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChurchillsInterfaceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChurchillsInterfaceResult" type="tns:APIResponseOfInt64" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfInt64">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="1" maxOccurs="1" name="Response" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetAdviser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewAdviserInitials" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAdviserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetAdviserResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddNoteResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteNote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Record" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteNoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteNoteResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ToggleEnrichment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActionKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="EnrichmentType" type="tns:EnrichmentEventType" />
+            <s:element minOccurs="1" maxOccurs="1" name="SetToInclude" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ToggleEnrichmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ToggleEnrichmentResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteEvent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActionKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteEventResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteEventResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListNotes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListNotesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListNotesResult" type="tns:APIResponseOfListOfDataEventNote" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfListOfDataEventNote">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:ArrayOfDataEventNote" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDataEventNote">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataEventNote" nillable="true" type="tns:DataEventNote" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataEventNote">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddedByUsername" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="LinkType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Record" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnrichmentType" type="tns:EnrichmentEventType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryGetCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Term" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryGetCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryGetCountResult" type="tns:APIResponseOfInt64" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Query">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Term" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryResult" type="tns:APIResponseOfListOfDataEvent" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateOverrideCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateOverrideCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateOverrideCodeResult" type="tns:APIResponseOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RevokeOverrideCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RevokeOverrideCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RevokeOverrideCodeResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PreviewPolicyCancellation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverrideFee" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyFeeOverride" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="CancellationTakeupDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="PremiumAdjustment" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="SingleAddonRecord" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reinstate" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExemptFromRefund" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PreviewPolicyCancellationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PreviewPolicyCancellationResult" type="tns:APIResponseOfCancellation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResponseOfCancellation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StackTrace" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="tns:APIResponseProfiling" />
+          <s:element minOccurs="0" maxOccurs="1" name="Response" type="tns:Cancellation" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cancellation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyFeeRefunded" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasClaims" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppliedFee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CancellationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CancellationLines" type="tns:ArrayOfCancellationLine" />
+          <s:element minOccurs="1" maxOccurs="1" name="NextInstalmentAmount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinAllowedCancellationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxAllowedCancellationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvailableCancellationReasons" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasOutstandingMTA" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasOutstandingRenewalInvite" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCancellationLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CancellationLine" nillable="true" type="tns:CancellationLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CancellationLine">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TransactionRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EntryDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DaysOnCover" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxDaysOnCover" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoicePaid" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceCommission" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="InvoiceFee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Paid" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaidCommission" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Refunded" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RefundedComission" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RefundedFee" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CostOfCover" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="yCostOfComission" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PolicyRecord" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyReference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BreakdownLines" type="tns:ArrayOfCancellationLine" />
+          <s:element minOccurs="1" maxOccurs="1" name="RefundExempt" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PreviewAddonCancellation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ParentPolicyReference" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddonSubTypeName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverrideFee" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyFeeOverride" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="CancellationTakeupDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="PremiumAdjustment" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="SingleAddonRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PreviewAddonCancellationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PreviewAddonCancellationResult" type="tns:APIResponseOfCancellation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PolicyCancellation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuoteRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverrideFee" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyFeeOverride" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="CancellationTakeupDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ZeroRefund" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="PremiumAdjustment" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="SingleAddonRecord" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ForceOutstandingQuotesRemoval" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="Reinstate" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExemptFromRefund" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PolicyCancellationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyCancellationResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddonCancellation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SystemToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuoteType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ParentPolicyReference" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddonSubTypeName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OverrideFee" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="EffectiveDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ApplyFeeOverride" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="CancellationTakeupDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="PremiumAdjustment" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="SingleAddonRecord" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddonCancellationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddonCancellationResult" type="tns:APIResponseOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAPIPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APIKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetAPIPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetAPIPasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:PriceComparisonStandardsGroup/20160505/AddOns">
+      <s:element name="Addons" type="s1:AddonList" />
+      <s:complexType name="AddonList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Addon" type="s1:Addon" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Addon">
+        <s:attribute name="Category" type="s:string" />
+        <s:attribute name="SubType" type="s:string" />
+      </s:complexType>
+      <s:complexType name="Free">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Addon" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Incremental">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Addon">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Price" type="s1:AddonPrice" />
+            </s:sequence>
+            <s:attribute name="Financeable" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AddonPrice">
+        <s:simpleContent>
+          <s:extension base="s:decimal">
+            <s:attribute name="Frequency" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="Bundled">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Addon" />
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetEventFeedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventFeed" />
+  </wsdl:message>
+  <wsdl:message name="GetEventFeedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEvent" />
+  </wsdl:message>
+  <wsdl:message name="GetEventSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventExportSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventExport" />
+  </wsdl:message>
+  <wsdl:message name="GetEventExportSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventExportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListRecordsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListRecords" />
+  </wsdl:message>
+  <wsdl:message name="ListRecordsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListArchivedRecordsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListArchivedRecords" />
+  </wsdl:message>
+  <wsdl:message name="ListArchivedRecordsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListArchivedRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ArchiveDataItemSoapIn">
+    <wsdl:part name="parameters" element="tns:ArchiveDataItem" />
+  </wsdl:message>
+  <wsdl:message name="ArchiveDataItemSoapOut">
+    <wsdl:part name="parameters" element="tns:ArchiveDataItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="RestoreDataItemSoapIn">
+    <wsdl:part name="parameters" element="tns:RestoreDataItem" />
+  </wsdl:message>
+  <wsdl:message name="RestoreDataItemSoapOut">
+    <wsdl:part name="parameters" element="tns:RestoreDataItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPolicyDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPolicyData" />
+  </wsdl:message>
+  <wsdl:message name="GetPolicyDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPolicyDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateToken" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestTokenValiditySoapIn">
+    <wsdl:part name="parameters" element="tns:TestTokenValidity" />
+  </wsdl:message>
+  <wsdl:message name="TestTokenValiditySoapOut">
+    <wsdl:part name="parameters" element="tns:TestTokenValidityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProduceRenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:ProduceRenewal" />
+  </wsdl:message>
+  <wsdl:message name="ProduceRenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:ProduceRenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProduceRenewalWithDocumentsSoapIn">
+    <wsdl:part name="parameters" element="tns:ProduceRenewalWithDocuments" />
+  </wsdl:message>
+  <wsdl:message name="ProduceRenewalWithDocumentsSoapOut">
+    <wsdl:part name="parameters" element="tns:ProduceRenewalWithDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProduceQuoteSoapIn">
+    <wsdl:part name="parameters" element="tns:ProduceQuote" />
+  </wsdl:message>
+  <wsdl:message name="ProduceQuoteSoapOut">
+    <wsdl:part name="parameters" element="tns:ProduceQuoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProduceQuoteWithDocumentsSoapIn">
+    <wsdl:part name="parameters" element="tns:ProduceQuoteWithDocuments" />
+  </wsdl:message>
+  <wsdl:message name="ProduceQuoteWithDocumentsSoapOut">
+    <wsdl:part name="parameters" element="tns:ProduceQuoteWithDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateQuoteSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateQuote" />
+  </wsdl:message>
+  <wsdl:message name="CreateQuoteSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateQuoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvertQuoteSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertQuote" />
+  </wsdl:message>
+  <wsdl:message name="ConvertQuoteSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertQuoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvertRenewalSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertRenewal" />
+  </wsdl:message>
+  <wsdl:message name="ConvertRenewalSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertRenewalResponse" />
+  </wsdl:message>
+  <wsdl:message name="PopulateTopXInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:PopulateTopXInfo" />
+  </wsdl:message>
+  <wsdl:message name="PopulateTopXInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:PopulateTopXInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadMessageCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUnreadMessageCount" />
+  </wsdl:message>
+  <wsdl:message name="GetUnreadMessageCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUnreadMessageCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageContentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessageContent" />
+  </wsdl:message>
+  <wsdl:message name="GetMessageContentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessageContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="MarkMessageUnreadSoapIn">
+    <wsdl:part name="parameters" element="tns:MarkMessageUnread" />
+  </wsdl:message>
+  <wsdl:message name="MarkMessageUnreadSoapOut">
+    <wsdl:part name="parameters" element="tns:MarkMessageUnreadResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteMessage" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSecureMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSecureMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendSecureMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSecureMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSecureMessageWithAttachmentSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSecureMessageWithAttachment" />
+  </wsdl:message>
+  <wsdl:message name="SendSecureMessageWithAttachmentSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSecureMessageWithAttachmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListDocumentsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListDocuments" />
+  </wsdl:message>
+  <wsdl:message name="ListDocumentsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListDocumentsBySystemTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ListDocumentsBySystemToken" />
+  </wsdl:message>
+  <wsdl:message name="ListDocumentsBySystemTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ListDocumentsBySystemTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListPersonalDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ListPersonalData" />
+  </wsdl:message>
+  <wsdl:message name="ListPersonalDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ListPersonalDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePersonalDataSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePersonalData" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePersonalDataSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePersonalDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:EditPassword" />
+  </wsdl:message>
+  <wsdl:message name="EditPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:EditPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditDataProtectionSoapIn">
+    <wsdl:part name="parameters" element="tns:EditDataProtection" />
+  </wsdl:message>
+  <wsdl:message name="EditDataProtectionSoapOut">
+    <wsdl:part name="parameters" element="tns:EditDataProtectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditUserSettingSoapIn">
+    <wsdl:part name="parameters" element="tns:EditUserSetting" />
+  </wsdl:message>
+  <wsdl:message name="EditUserSettingSoapOut">
+    <wsdl:part name="parameters" element="tns:EditUserSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestPostcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:TestPostcode" />
+  </wsdl:message>
+  <wsdl:message name="TestPostcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:TestPostcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestPostcodeAcceptanceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestPostcodeAcceptance" />
+  </wsdl:message>
+  <wsdl:message name="TestPostcodeAcceptanceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestPostcodeAcceptanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestAddressAcceptanceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestAddressAcceptance" />
+  </wsdl:message>
+  <wsdl:message name="TestAddressAcceptanceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestAddressAcceptanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="MemberMISoapIn">
+    <wsdl:part name="parameters" element="tns:MemberMI" />
+  </wsdl:message>
+  <wsdl:message name="MemberMISoapOut">
+    <wsdl:part name="parameters" element="tns:MemberMIResponse" />
+  </wsdl:message>
+  <wsdl:message name="TESTMemberMISoapIn">
+    <wsdl:part name="parameters" element="tns:TESTMemberMI" />
+  </wsdl:message>
+  <wsdl:message name="TESTMemberMISoapOut">
+    <wsdl:part name="parameters" element="tns:TESTMemberMIResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChurchillsInterfaceSoapIn">
+    <wsdl:part name="parameters" element="tns:ChurchillsInterface" />
+  </wsdl:message>
+  <wsdl:message name="ChurchillsInterfaceSoapOut">
+    <wsdl:part name="parameters" element="tns:ChurchillsInterfaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAdviserSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAdviser" />
+  </wsdl:message>
+  <wsdl:message name="SetAdviserSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAdviserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddNoteSoapIn">
+    <wsdl:part name="parameters" element="tns:AddNote" />
+  </wsdl:message>
+  <wsdl:message name="AddNoteSoapOut">
+    <wsdl:part name="parameters" element="tns:AddNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteNoteSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteNote" />
+  </wsdl:message>
+  <wsdl:message name="DeleteNoteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ToggleEnrichmentSoapIn">
+    <wsdl:part name="parameters" element="tns:ToggleEnrichment" />
+  </wsdl:message>
+  <wsdl:message name="ToggleEnrichmentSoapOut">
+    <wsdl:part name="parameters" element="tns:ToggleEnrichmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEventSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteEvent" />
+  </wsdl:message>
+  <wsdl:message name="DeleteEventSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListNotesSoapIn">
+    <wsdl:part name="parameters" element="tns:ListNotes" />
+  </wsdl:message>
+  <wsdl:message name="ListNotesSoapOut">
+    <wsdl:part name="parameters" element="tns:ListNotesResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryGetCountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryGetCount" />
+  </wsdl:message>
+  <wsdl:message name="QueryGetCountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryGetCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="QuerySoapIn">
+    <wsdl:part name="parameters" element="tns:Query" />
+  </wsdl:message>
+  <wsdl:message name="QuerySoapOut">
+    <wsdl:part name="parameters" element="tns:QueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOverrideCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateOverrideCode" />
+  </wsdl:message>
+  <wsdl:message name="CreateOverrideCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateOverrideCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="RevokeOverrideCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:RevokeOverrideCode" />
+  </wsdl:message>
+  <wsdl:message name="RevokeOverrideCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:RevokeOverrideCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PreviewPolicyCancellationSoapIn">
+    <wsdl:part name="parameters" element="tns:PreviewPolicyCancellation" />
+  </wsdl:message>
+  <wsdl:message name="PreviewPolicyCancellationSoapOut">
+    <wsdl:part name="parameters" element="tns:PreviewPolicyCancellationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PreviewAddonCancellationSoapIn">
+    <wsdl:part name="parameters" element="tns:PreviewAddonCancellation" />
+  </wsdl:message>
+  <wsdl:message name="PreviewAddonCancellationSoapOut">
+    <wsdl:part name="parameters" element="tns:PreviewAddonCancellationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PolicyCancellationSoapIn">
+    <wsdl:part name="parameters" element="tns:PolicyCancellation" />
+  </wsdl:message>
+  <wsdl:message name="PolicyCancellationSoapOut">
+    <wsdl:part name="parameters" element="tns:PolicyCancellationResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddonCancellationSoapIn">
+    <wsdl:part name="parameters" element="tns:AddonCancellation" />
+  </wsdl:message>
+  <wsdl:message name="AddonCancellationSoapOut">
+    <wsdl:part name="parameters" element="tns:AddonCancellationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetAPIPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAPIPassword" />
+  </wsdl:message>
+  <wsdl:message name="SetAPIPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAPIPasswordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CFS_x0020_Schemes_x0020_APISoap">
+    <wsdl:operation name="GetEventFeed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the top-level event data feed for adviser consumption</wsdl:documentation>
+      <wsdl:input message="tns:GetEventFeedSoapIn" />
+      <wsdl:output message="tns:GetEventFeedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a single event (for menu option refresh)</wsdl:documentation>
+      <wsdl:input message="tns:GetEventSoapIn" />
+      <wsdl:output message="tns:GetEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventExport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the top-level event data feed for export consumption</wsdl:documentation>
+      <wsdl:input message="tns:GetEventExportSoapIn" />
+      <wsdl:output message="tns:GetEventExportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListRecords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of DataItem's that belong to the UserToken.</wsdl:documentation>
+      <wsdl:input message="tns:ListRecordsSoapIn" />
+      <wsdl:output message="tns:ListRecordsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListArchivedRecords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of archived DataItem's that belong to the UserToken.</wsdl:documentation>
+      <wsdl:input message="tns:ListArchivedRecordsSoapIn" />
+      <wsdl:output message="tns:ListArchivedRecordsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveDataItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks a DataItem as archived and removes it from the main ListRecords feed.</wsdl:documentation>
+      <wsdl:input message="tns:ArchiveDataItemSoapIn" />
+      <wsdl:output message="tns:ArchiveDataItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDataItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Restores quote data for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:RestoreDataItemSoapIn" />
+      <wsdl:output message="tns:RestoreDataItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a policy list</wsdl:documentation>
+      <wsdl:input message="tns:GetPolicyDataSoapIn" />
+      <wsdl:output message="tns:GetPolicyDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new access token using the specified integrator details</wsdl:documentation>
+      <wsdl:input message="tns:GenerateTokenSoapIn" />
+      <wsdl:output message="tns:GenerateTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestTokenValidity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Tests the token to ensure it's valid</wsdl:documentation>
+      <wsdl:input message="tns:TestTokenValiditySoapIn" />
+      <wsdl:output message="tns:TestTokenValiditySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new renewal quote for the specified policy</wsdl:documentation>
+      <wsdl:input message="tns:ProduceRenewalSoapIn" />
+      <wsdl:output message="tns:ProduceRenewalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewalWithDocuments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new renewal quote for the specified policy and includes quote documents in the response</wsdl:documentation>
+      <wsdl:input message="tns:ProduceRenewalWithDocumentsSoapIn" />
+      <wsdl:output message="tns:ProduceRenewalWithDocumentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new quote with the specified details</wsdl:documentation>
+      <wsdl:input message="tns:ProduceQuoteSoapIn" />
+      <wsdl:output message="tns:ProduceQuoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuoteWithDocuments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new quote with the specified details and includes quote documents in the response</wsdl:documentation>
+      <wsdl:input message="tns:ProduceQuoteWithDocumentsSoapIn" />
+      <wsdl:output message="tns:ProduceQuoteWithDocumentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new quote with the specified details WITHOUT generating a premium.</wsdl:documentation>
+      <wsdl:input message="tns:CreateQuoteSoapIn" />
+      <wsdl:output message="tns:CreateQuoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertQuote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Converts a quote to a policy</wsdl:documentation>
+      <wsdl:input message="tns:ConvertQuoteSoapIn" />
+      <wsdl:output message="tns:ConvertQuoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertRenewal">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Converts a renewal quote to a policy</wsdl:documentation>
+      <wsdl:input message="tns:ConvertRenewalSoapIn" />
+      <wsdl:output message="tns:ConvertRenewalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PopulateTopXInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Populates key aggregator information for an individual quote row.</wsdl:documentation>
+      <wsdl:input message="tns:PopulateTopXInfoSoapIn" />
+      <wsdl:output message="tns:PopulateTopXInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadMessageCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of unread messages within the specified inbox.</wsdl:documentation>
+      <wsdl:input message="tns:GetUnreadMessageCountSoapIn" />
+      <wsdl:output message="tns:GetUnreadMessageCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of unread messages within the specified inbox.</wsdl:documentation>
+      <wsdl:input message="tns:GetMessagesSoapIn" />
+      <wsdl:output message="tns:GetMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageContent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns message content.</wsdl:documentation>
+      <wsdl:input message="tns:GetMessageContentSoapIn" />
+      <wsdl:output message="tns:GetMessageContentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MarkMessageUnread">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Marks a message as unread.</wsdl:documentation>
+      <wsdl:input message="tns:MarkMessageUnreadSoapIn" />
+      <wsdl:output message="tns:MarkMessageUnreadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a message.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteMessageSoapIn" />
+      <wsdl:output message="tns:DeleteMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send a secure message.</wsdl:documentation>
+      <wsdl:input message="tns:SendSecureMessageSoapIn" />
+      <wsdl:output message="tns:SendSecureMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessageWithAttachment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Send a secure message containing an attachment.</wsdl:documentation>
+      <wsdl:input message="tns:SendSecureMessageWithAttachmentSoapIn" />
+      <wsdl:output message="tns:SendSecureMessageWithAttachmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListDocuments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lists documents for the specified user and optionally by policy.</wsdl:documentation>
+      <wsdl:input message="tns:ListDocumentsSoapIn" />
+      <wsdl:output message="tns:ListDocumentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListDocumentsBySystemToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lists documents for by token for the specified quote row.</wsdl:documentation>
+      <wsdl:input message="tns:ListDocumentsBySystemTokenSoapIn" />
+      <wsdl:output message="tns:ListDocumentsBySystemTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListPersonalData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lists personal data for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:ListPersonalDataSoapIn" />
+      <wsdl:output message="tns:ListPersonalDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates personal data for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:UpdatePersonalDataSoapIn" />
+      <wsdl:output message="tns:UpdatePersonalDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates CFS password for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:EditPasswordSoapIn" />
+      <wsdl:output message="tns:EditPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDataProtection">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates Durell Data protection consent for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:EditDataProtectionSoapIn" />
+      <wsdl:output message="tns:EditDataProtectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUserSetting">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates user setting for the usertoken</wsdl:documentation>
+      <wsdl:input message="tns:EditUserSettingSoapIn" />
+      <wsdl:output message="tns:EditUserSettingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Tests a postcode for a specific quote type to establish the insurer rates for the specified quote type.</wsdl:documentation>
+      <wsdl:input message="tns:TestPostcodeSoapIn" />
+      <wsdl:output message="tns:TestPostcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcodeAcceptance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Tests a postcode for a specific quote type to establish if it's acceptable or not for each insurer.</wsdl:documentation>
+      <wsdl:input message="tns:TestPostcodeAcceptanceSoapIn" />
+      <wsdl:output message="tns:TestPostcodeAcceptanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestAddressAcceptance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Tests a postcode for a specific quote type to establish if it's acceptable or not for each insurer.</wsdl:documentation>
+      <wsdl:input message="tns:TestAddressAcceptanceSoapIn" />
+      <wsdl:output message="tns:TestAddressAcceptanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MemberMI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of Member data containing MI info for marketing purposes.</wsdl:documentation>
+      <wsdl:input message="tns:MemberMISoapIn" />
+      <wsdl:output message="tns:MemberMISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TESTMemberMI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of Member data containing MI info for marketing purposes.</wsdl:documentation>
+      <wsdl:input message="tns:TESTMemberMISoapIn" />
+      <wsdl:output message="tns:TESTMemberMISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChurchillsInterface">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">For use by Churchill's app only.</wsdl:documentation>
+      <wsdl:input message="tns:ChurchillsInterfaceSoapIn" />
+      <wsdl:output message="tns:ChurchillsInterfaceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAdviser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Set the AdviserInitials for the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:SetAdviserSoapIn" />
+      <wsdl:output message="tns:SetAdviserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a note to the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:AddNoteSoapIn" />
+      <wsdl:output message="tns:AddNoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a note from the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteNoteSoapIn" />
+      <wsdl:output message="tns:DeleteNoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ToggleEnrichment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Toggles enrichment.</wsdl:documentation>
+      <wsdl:input message="tns:ToggleEnrichmentSoapIn" />
+      <wsdl:output message="tns:ToggleEnrichmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes the selected event from the quotes table and events data.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteEventSoapIn" />
+      <wsdl:output message="tns:DeleteEventSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListNotes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets notes for the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:ListNotesSoapIn" />
+      <wsdl:output message="tns:ListNotesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryGetCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets notes for the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:QueryGetCountSoapIn" />
+      <wsdl:output message="tns:QueryGetCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the top-level event data feed for adviser consumption</wsdl:documentation>
+      <wsdl:input message="tns:QuerySoapIn" />
+      <wsdl:output message="tns:QuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOverrideCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a quote override key for the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:CreateOverrideCodeSoapIn" />
+      <wsdl:output message="tns:CreateOverrideCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeOverrideCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Revokes the quote override key for the specified quote.</wsdl:documentation>
+      <wsdl:input message="tns:RevokeOverrideCodeSoapIn" />
+      <wsdl:output message="tns:RevokeOverrideCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PreviewPolicyCancellation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns preview cancellation data for the specified quote/policy.</wsdl:documentation>
+      <wsdl:input message="tns:PreviewPolicyCancellationSoapIn" />
+      <wsdl:output message="tns:PreviewPolicyCancellationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PreviewAddonCancellation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns preview cancellation data for the specified addon type linked to the specific policy reference.</wsdl:documentation>
+      <wsdl:input message="tns:PreviewAddonCancellationSoapIn" />
+      <wsdl:output message="tns:PreviewAddonCancellationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PolicyCancellation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels the specified quote/policy (run preview first to check figures!).</wsdl:documentation>
+      <wsdl:input message="tns:PolicyCancellationSoapIn" />
+      <wsdl:output message="tns:PolicyCancellationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddonCancellation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Cancels the specified addon type linked to the specific policy reference.</wsdl:documentation>
+      <wsdl:input message="tns:AddonCancellationSoapIn" />
+      <wsdl:output message="tns:AddonCancellationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAPIPassword">
+      <wsdl:input message="tns:SetAPIPasswordSoapIn" />
+      <wsdl:output message="tns:SetAPIPasswordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CFS_x0020_Schemes_x0020_APISoap" type="tns:CFS_x0020_Schemes_x0020_APISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEventFeed">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetEventFeed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventExport">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetEventExport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListRecords">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListArchivedRecords">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListArchivedRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveDataItem">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ArchiveDataItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDataItem">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/RestoreDataItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyData">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetPolicyData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateToken">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GenerateToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestTokenValidity">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/TestTokenValidity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewal">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ProduceRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewalWithDocuments">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ProduceRenewalWithDocuments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuote">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ProduceQuote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuoteWithDocuments">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ProduceQuoteWithDocuments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuote">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/CreateQuote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertQuote">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ConvertQuote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertRenewal">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ConvertRenewal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PopulateTopXInfo">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/PopulateTopXInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadMessageCount">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetUnreadMessageCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageContent">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/GetMessageContent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkMessageUnread">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/MarkMessageUnread" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessage">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/SendSecureMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessageWithAttachment">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/SendSecureMessageWithAttachment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListDocuments">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListDocuments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListDocumentsBySystemToken">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListDocumentsBySystemToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListPersonalData">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListPersonalData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalData">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/UpdatePersonalData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditPassword">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/EditPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDataProtection">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/EditDataProtection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserSetting">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/EditUserSetting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcode">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/TestPostcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcodeAcceptance">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/TestPostcodeAcceptance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestAddressAcceptance">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/TestAddressAcceptance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberMI">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/MemberMI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TESTMemberMI">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/TESTMemberMI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChurchillsInterface">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ChurchillsInterface" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAdviser">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/SetAdviser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNote">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/AddNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNote">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/DeleteNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ToggleEnrichment">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ToggleEnrichment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/DeleteEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListNotes">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/ListNotes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryGetCount">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/QueryGetCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/Query" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOverrideCode">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/CreateOverrideCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeOverrideCode">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/RevokeOverrideCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewPolicyCancellation">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/PreviewPolicyCancellation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewAddonCancellation">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/PreviewAddonCancellation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyCancellation">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/PolicyCancellation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddonCancellation">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/AddonCancellation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAPIPassword">
+      <soap:operation soapAction="https://cfsnetwork.co.uk/SetAPIPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CFS_x0020_Schemes_x0020_APISoap12" type="tns:CFS_x0020_Schemes_x0020_APISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetEventFeed">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetEventFeed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventExport">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetEventExport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListRecords">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListRecords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListArchivedRecords">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListArchivedRecords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveDataItem">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ArchiveDataItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDataItem">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/RestoreDataItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolicyData">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetPolicyData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateToken">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GenerateToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestTokenValidity">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/TestTokenValidity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewal">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ProduceRenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceRenewalWithDocuments">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ProduceRenewalWithDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuote">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ProduceQuote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceQuoteWithDocuments">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ProduceQuoteWithDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuote">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/CreateQuote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertQuote">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ConvertQuote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertRenewal">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ConvertRenewal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PopulateTopXInfo">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/PopulateTopXInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnreadMessageCount">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetUnreadMessageCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageContent">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/GetMessageContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkMessageUnread">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/MarkMessageUnread" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessage">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/SendSecureMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSecureMessageWithAttachment">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/SendSecureMessageWithAttachment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListDocuments">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListDocumentsBySystemToken">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListDocumentsBySystemToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListPersonalData">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListPersonalData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonalData">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/UpdatePersonalData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditPassword">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/EditPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDataProtection">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/EditDataProtection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserSetting">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/EditUserSetting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcode">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/TestPostcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestPostcodeAcceptance">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/TestPostcodeAcceptance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestAddressAcceptance">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/TestAddressAcceptance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MemberMI">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/MemberMI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TESTMemberMI">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/TESTMemberMI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChurchillsInterface">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ChurchillsInterface" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAdviser">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/SetAdviser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNote">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/AddNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteNote">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/DeleteNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ToggleEnrichment">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ToggleEnrichment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/DeleteEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListNotes">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/ListNotes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryGetCount">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/QueryGetCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Query">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/Query" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOverrideCode">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/CreateOverrideCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeOverrideCode">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/RevokeOverrideCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewPolicyCancellation">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/PreviewPolicyCancellation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewAddonCancellation">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/PreviewAddonCancellation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PolicyCancellation">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/PolicyCancellation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddonCancellation">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/AddonCancellation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAPIPassword">
+      <soap12:operation soapAction="https://cfsnetwork.co.uk/SetAPIPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CFS_x0020_Schemes_x0020_API">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Interface for Durell CFS custom schemes</wsdl:documentation>
+    <wsdl:port name="CFS_x0020_Schemes_x0020_APISoap" binding="tns:CFS_x0020_Schemes_x0020_APISoap">
+      <soap:address location="http://cfsbeta.co.uk/API/default.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CFS_x0020_Schemes_x0020_APISoap12" binding="tns:CFS_x0020_Schemes_x0020_APISoap12">
+      <soap12:address location="http://cfsbeta.co.uk/API/default.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

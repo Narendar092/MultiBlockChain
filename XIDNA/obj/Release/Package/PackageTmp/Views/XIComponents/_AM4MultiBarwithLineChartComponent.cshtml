@@ -1,0 +1,67 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    XIGraphData oXIGraph = new XIGraphData();
+    List<XIIBO> values = new List<XIIBO>();
+    List<string> Keys = new List<string>();
+    List<XIVisualisationNV> oXIVisualisations = new List<XIVisualisationNV>();
+    var sColour = new List<string>();
+    var KeyPairs = new List<Dictionary<string, string>>();
+    oXIGraph = (XIGraphData)Model.oContent[XIConstant.AM4MultiBarwithLineChartComponent];
+    // int n = 0;
+    int forseries = 0;
+    if (Model.oContent.ContainsKey(XIConstant.AM4MultiBarwithLineChartComponent))
+    {
+        Dictionary<List<string>, List<XIIBO>> OneClickRes = new Dictionary<List<string>, List<XIIBO>>();
+        if (Model.oContent.Count() != 0)
+        {
+            OneClickRes = oXIGraph.ComOneClick;
+            if (OneClickRes != null)
+            {
+                values = OneClickRes.Select(s => s.Value).FirstOrDefault();
+                Keys = OneClickRes.Select(s => s.Key).FirstOrDefault();
+                oXIVisualisations = oXIGraph.oXIVisualisations;
+                KeyPairs = oXIGraph.KeyPairs;
+            }
+            if (oXIGraph.sColours == null)
+            {
+                sColour = "#00ff00,#ffff00,#800000,#800080,#0000ff,#ffa500".Split(',').ToList();
+            }
+            else
+            {
+                sColour = oXIGraph.sColours;
+            }
+        }
+    }
+    var NewGUID = Guid.NewGuid();
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@oXIGraph.QueryName</div>        
+        @*<div class="card-option">Last Updated:-<strong>@oXIGraph.sLastUpdated</strong></div>*@
+    </div>
+    <div class="chart-container card-body">
+        <div id="AM4MultiBarChart-@NewGUID-@oXIGraph.sOneClickID"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var JsonData=@Html.Raw(Json.Encode(KeyPairs));
+        @*////var JsonData=@Html.Raw(Json.Encode(values));*@
+        JsonData.OneClick='@oXIGraph.sOneClickID';
+        JsonData.RowXilinkID='@oXIGraph.RowXilinkID';
+        var Keys=@Html.Raw(Json.Encode(Keys));
+        var Colour =@Html.Raw(Json.Encode(sColour));
+        JsonData.bToolTip = '@oXIGraph.bToolTip';
+        JsonData.bIsGridLine = '@oXIGraph.bGridLines';
+        JsonData.bIsCursor = '@oXIGraph.bIsCursor';
+        JsonData.bIsLegends = '@oXIGraph.bIsLegends';
+        JsonData.sLegendPosition = '@oXIGraph.sLegendPosition';
+        var SeriesType = "bar,bar,line".split(',');
+        fncDeviceAM4MultiBarChart(JsonData, Keys, Colour, "@NewGUID")
+    });
+</script>

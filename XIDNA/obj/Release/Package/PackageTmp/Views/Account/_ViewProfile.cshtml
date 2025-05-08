@@ -1,0 +1,88 @@
+﻿@model XIDNA.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+<link rel="stylesheet" href="~/Content/lineicons/css/simple-line-icons.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Content/css/skins/outrun-theme.css">
+<div class="profile-page">
+    <section class="login-box">
+        <!-- <div class="main-header">
+            <a href="@Url.Action("Landingpages","Home")" class="logo" style="margin-right: auto;"></a>
+        </div> -->
+        <a href="@Url.Action("Landingpages","Home")" class="login-box-logo"></a>
+        <div class="login-box-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-bold">@ViewBag.Title</h4>
+                <a href="@Url.Action("Landingpages","Home")" class="btn btn-outline btn-theme">Back</a>
+            </div>
+            <h4 class="card-title">Change your account settings</h4>
+            <div  class="text-info">@ViewBag.StatusMessage</div>
+            <table class="table table-condensed table-borderless mb-0 tfs-lg">
+                <tr>
+                    @*<td>Password</td>*@
+                    <td>
+                        @if (Model.HasPassword)
+                        {
+                            @* @Html.ActionLink("Change your password", "ChangePassword") *@
+                            @*@Html.ActionLink("Change your password", "ChangePassword", "Manage", null, new { @class = "btn btn-warning" })*@
+                            @*<a href="#">Change your password</a>*@
+                        }
+                        else
+                        {
+                            @* @Html.ActionLink("Create", "SetPassword") *@
+                            <a href="#">Create</a>
+                        }
+                    </td>
+                </tr>
+                
+                @*<dt>External Logins:</dt>
+                <dd>
+                    @Model.Logins.Count [
+                    @Html.ActionLink("Manage", "ManageLogins") ]
+                </dd>*@
+                <tr>
+                    <td>Enable TOTP</td>
+                    <td class="text-right">
+                        @if (Model.TwoFactor)
+                        {
+                            @Html.ActionLink("Enable TOTP", "EnableTOTPAuthenticator", "Manage", null, new { @class = "btn btn-warning", @readonly = "readonly", @disabled = "true"})
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Enable TOTP", "EnableTOTPAuthenticator", "Manage", null, new { @class = "btn btn-warning"})
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Two-Factor Authentication</td>
+                    <td class="text-right">
+                        @*@if (Model.TwoFactor)
+                        {*@
+                            @*@using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "",@style = "margin:0;", role = "form" }))*@
+                            @*{
+                                @Html.AntiForgeryToken()
+                                <div class="toggle-text">
+                                    <span>Disabled</span>
+                                    <input type="submit" value="Enable" class="" />
+                                </div>
+                            }*@
+                        @*}
+                        else
+                        {*@
+                            @using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "",@style = "margin:0;", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="toggle-text">
+                                    @*<span>Enable</span>*@
+                                    <input type="submit" value="Disable" class="" />
+                                </div>
+                            }
+                        @*}*@
+                    </td>
+                </tr>        
+            </table>            
+        </div>
+    </section>
+</div>

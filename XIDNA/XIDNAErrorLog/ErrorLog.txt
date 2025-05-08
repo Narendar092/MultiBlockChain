@@ -1,0 +1,915 @@
+ERROR 2025-04-02 19:22:49,153 66039ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-02 19:24:37,143 174029ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:9c38109e-ec6c-4164-a372-cf258a6e60f6
+Error Number:207,State:1,Class:16
+ERROR 2025-04-02 19:24:37,378 174264ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-03 08:53:57,959 38560ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-03 08:55:51,572 152173ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:a80efe39-500d-4ee9-8b38-22e409ff80db
+Error Number:207,State:1,Class:16
+ERROR 2025-04-03 08:55:52,087 152687ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-03 09:14:48,016 1288617ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:8ce50ab8-f967-44a6-aa75-35a0c3e6f771
+Error Number:207,State:1,Class:16
+ERROR 2025-04-03 09:15:18,765 1319365ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-03 09:16:34,197 1394797ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:8ce50ab8-f967-44a6-aa75-35a0c3e6f771
+Error Number:207,State:1,Class:16
+ERROR 2025-04-03 09:16:34,622 1395222ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-03 09:43:06,943 2987544ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-03 09:43:59,863 3040464ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:05f0046e-7c08-4f67-936e-af7739516083
+Error Number:207,State:1,Class:16
+ERROR 2025-04-03 09:44:00,270 3040871ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-04 17:06:32,575 60158ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-04 17:10:04,857 272439ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:64bdbb44-aa23-4327-88a5-2ef9053fea74
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:10:05,149 272731ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-04 17:11:05,392 332975ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-04 17:11:22,585 350168ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:64bdbb44-aa23-4327-88a5-2ef9053fea74
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:11:23,004 350586ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-04 17:11:50,564 378146ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:64bdbb44-aa23-4327-88a5-2ef9053fea74
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:12:02,288 389870ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-04 17:12:22,434 410017ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:64bdbb44-aa23-4327-88a5-2ef9053fea74
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:12:22,873 410456ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-04 17:14:29,555 537137ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:7f0be0ec-3ad9-464b-8df3-b3aa98ac4718
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:20:42,447 910030ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:ce02e58b-5bf6-431e-8472-baad3d6d300a
+Error Number:207,State:1,Class:16
+ERROR 2025-04-04 17:25:58,615 106764ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-04 17:29:14,198 302347ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-04 17:30:01,272 349421ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:12025d29-d0e4-4b5c-bddb-24f75e96c763
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 12:11:32,353 754626ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 12:16:12,914 148075ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 12:20:03,329 378490ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 12:24:30,343 645504ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:663ddc9c-5d19-42fc-b422-a17ec9e5e71c
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 12:26:36,816 771977ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near ')'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at XIDatabase.XIDBAPI.GetTotalCount(CommandType commandType, String sql, List`1 parameters) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 164
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 936
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:bca448ac-1cf5-4937-91d7-737c0ceb5709
+Error Number:102,State:1,Class:15
+ERROR 2025-04-06 12:28:41,280 896441ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near ')'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at XIDatabase.XIDBAPI.GetTotalCount(CommandType commandType, String sql, List`1 parameters) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 164
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 936
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:663ddc9c-5d19-42fc-b422-a17ec9e5e71c
+Error Number:102,State:1,Class:15
+ERROR 2025-04-06 12:30:17,118 992279ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:bca448ac-1cf5-4937-91d7-737c0ceb5709
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 12:30:47,612 1022773ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 15:45:29,069 126512ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 16:01:16,687 1074130ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 16:01:17,181 1074624ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:c52aa4b7-4041-4793-baf3-52f64327fbc8
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 16:01:30,849 1088293ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 16:06:01,856 1359300ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:24e92b65-2c56-4c4c-bc1f-4e83db6c1e1c
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 16:06:05,704 1363147ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 16:15:27,224 214451ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 16:22:53,079 660306ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 16:22:53,251 660478ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:c74464e7-5c66-42a0-8d05-5614c62ae4e7
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 16:27:46,017 953244ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:c74464e7-5c66-42a0-8d05-5614c62ae4e7
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 16:30:18,509 1105736ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 16:31:04,661 1151888ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 16:31:45,266 1192493ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Conversion failed when converting from a character string to uniqueidentifier.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at System.Data.SqlClient.SqlDataReader.Read()
+   at System.Data.SqlClient.SqlCommand.CompleteExecuteScalar(SqlDataReader ds, Boolean returnSqlValue)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at XIDatabase.XIDBAPI.GetTotalCount(CommandType commandType, String sql, List`1 parameters) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 164
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 936
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:94d3d0a2-72a0-4251-aed5-3e35b4df6ec8
+Error Number:8169,State:2,Class:16
+ERROR 2025-04-06 16:56:38,634 42257ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 17:02:42,540 80180ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 17:03:51,525 149165ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'sDescription'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader()
+   at XIDatabase.XIDBAPI.ExecuteReader(CommandType commandType, String sqlquery, List`1 parameters, TransactionInitiation TransactionIntiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 242
+   at XIDatabase.XIDBAPI.ExecuteQuery(String sQuery, List`1 lstparams, TransactionInitiation TXInitiation) in C:\Gnana\XI_New\Converter\XIDataBase\Class\XIDBAPI.cs:line 388
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 1042
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:7b81762c-dcdf-4274-a3ad-1f52456e8a9d
+Error Number:207,State:1,Class:16
+ERROR 2025-04-06 17:03:52,031 149672ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 17:07:35,757 63485ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-06 17:08:28,560 116288ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-06 17:09:12,497 160225ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\Converter\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\Converter\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\Converter\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\Converter\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-07 09:36:53,443 67498ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\Converter\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\Converter\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 09:27:53,149 262288ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 09:47:29,057 77035ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 09:52:42,030 78233ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 09:55:40,071 256274ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 09:56:53,938 330141ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:08:00,531 216668ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:11:45,273 111742ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:16:29,697 80022ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:23:35,996 91535ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:27:03,525 299063ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 10:44:24,788 75564ms InboxController        GetHomeHeader      - System.Data.ConstraintException: The 'RowXiLinkIDXIGUID' property on 'Reports' could not be set to a 'null' value. You must set this property to a non-null value of type 'System.Guid'. 
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper.HandleEntityAppendOnly[TEntity](Func`2 constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+   at lambda_method(Closure , Shaper )
+   at System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at XIDNA.Repository.InboxRepository.GetQueriesByID(Int32 iUserID, Int32 OrgID, String sDatabase, String sOrgName) in C:\Gnana\XI_New\MBCO\XIDNA.Repository\InboxRepository\InboxRepository.cs:line 593
+   at XIDNA.Controllers.InboxController.GetHomeHeader() in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\InboxController.cs:line 304
+ERROR 2025-04-30 11:02:10,695 198333ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-04-30 11:02:30,081 217719ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-05-01 10:56:32,635 244199ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'bcoProjects_T'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at XIDatabase.XIDBAPI.GetTotalCount(CommandType commandType, String sql, List`1 parameters) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\XIDBAPI.cs:line 164
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 936
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:be251e37-4f11-44b7-83ef-82884fabd721
+Error Number:208,State:1,Class:16
+ERROR 2025-05-01 10:58:18,377 349942ms XiLinkController       GetOneClickResult  - System.Data.SqlClient.SqlException (0x80131904): Invalid object name 'bcoProjects_T'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   at XIDatabase.XIDBAPI.GetTotalCount(CommandType commandType, String sql, List`1 parameters) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\XIDBAPI.cs:line 164
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 936
+   at XIDNA.Controllers.XiLinkController.GetOneClickResult(jQueryDataTableParamModel param, String i1ClickID, String sGUID, String sSearchText, String ActiveTabParam, String sTabGUID) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 2851
+ClientConnectionId:be251e37-4f11-44b7-83ef-82884fabd721
+Error Number:208,State:1,Class:16
+ERROR 2025-05-02 12:15:25,010 1751882ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-05-02 12:16:09,376 1796248ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-05-02 12:25:26,552 2353424ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-05-02 12:40:11,003 221947ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781
+ERROR 2025-05-02 12:41:23,645 294590ms XiLinkController       TriggerLayout      - System.ArgumentNullException: Value cannot be null.
+Parameter name: Initial Catalog
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_InitialCatalog(String value)
+   at XIDatabase.cConnectionString.ConnectionString(String database) in C:\Gnana\XI_New\MBCO\XIDataBase\Class\cConnectionString.cs:line 19
+   at XICore.XIDXI.GetBODataSource(String iDataSourceID, Int32 iApplicationID, String sType) in C:\Gnana\XI_New\MBCO\XICore\Class\XIDXI.cs:line 888
+   at XICore.XID1Click.OneClick_Execute(List`1 SessionItems, XID1Click o1ClickD) in C:\Gnana\XI_New\MBCO\XICore\Class\XID1Click.cs:line 620
+   at XIDNA.Controllers.XiLinkController.TriggerLayout(String sGUID, String LayoutGuid) in C:\Gnana\XI_New\MBCO\XIDNA\Controllers\XiLinkController.cs:line 21781

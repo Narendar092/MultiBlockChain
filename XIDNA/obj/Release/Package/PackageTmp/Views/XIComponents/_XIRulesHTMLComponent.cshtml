@@ -1,0 +1,438 @@
+﻿
+@model XICore.XIIComponent
+@using XIDNA
+@using XISystem
+@using XICore
+@using xiEnumSystem
+@{
+    var sRes = "";
+    XIRulesHTMLComponentInput oInp = null;
+    string sRuleGroup = string.Empty;
+    string sBOD = null;
+    string sGroupName = null;
+    string sMode = null;
+    if (Model.oContent.ContainsKey(XIConstant.RulesComponent))
+    {
+        oInp = (XIRulesHTMLComponentInput)Model.oContent[XIConstant.RulesComponent];
+        if (oInp != null)
+        {
+            sRuleGroup = Newtonsoft.Json.JsonConvert.SerializeObject(oInp.oRuleGroup);
+            sBOD = Newtonsoft.Json.JsonConvert.SerializeObject(oInp.oBOD);
+            sGroupName = oInp.sGroupName;
+            sMode = oInp.sMode;
+        }
+    }
+}
+<script src="~/Scripts/HTMLComponents/RulesComponent.js"></script>
+<template id="rule-template">
+    <div id="rule-template-body" class="rule-group-body" style="padding:8px; border: 1px solid black; display:flex; flex-direction:column; justify-content:center; align-items: flex-start; flex: 1 1 auto; gap: 10px;">
+        <div id="rule-header" style="display: flex; flex-direction:row; justify-content: flex-start; align-items: center; gap:5px;">
+            <select id="rulegroup-operator">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+            </select>
+            <button id="addrule-button" type="button" title="Add rule">+ Rule</button>
+            <button id="addgroup-button" type="button" title="Add group">+ Group</button>
+            <button id="delete-button" type="button" title="Delete"><i class="fa-regular fa-trash-can"></i>Delete</button>
+        </div>
+        <div id="rule-body" style="display: flex; flex-direction:column; justify-content: center; align-items: flex-start; flex: 1 1 auto; gap: 5px;">
+        </div>
+    </div>
+</template>
+<template id="select-template">
+    <select id="select-control">
+    </select>
+</template>
+<template id="row-template">
+    <div id="row" class="rule-row" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 5px;">
+    </div>
+</template>
+<template id="button-template">
+    <button id="delete-button" type="button" title="Delete"><i class="fa-regular fa-trash-can"></i>Delete</button>
+</template>
+@*<template id="rule-header">
+        <div style="display: flex; flex-direction:row; justify-content: flex-start; align-items: center;">
+            <select>
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+            </select>
+            <button type="button" title="Add rule">+ Rule</button>
+            <button type="button" title="Add group">+ Group</button>
+        </div>
+    </template>
+    <template id="rule-body">
+    </template>*@
+<rules-component rule="@sRuleGroup" bod="@sBOD" groupname="@sGroupName" mode="@sMode"></rules-component>
+
+<script>
+    document.querySelector('rules-component').addEventListener('emitRule', async (event) => {
+        debugger
+        console.log('rules emitted: ', event.detail.value);
+        var mode = event.detail.mode;
+        fncSaveRules(event.detail.value);
+        var sXiScript = "";
+        if (mode === "object") {
+            var sSQL = await fncGetSQL(event.detail.value, "");
+            sXiScript = "xi.s|" + fncGetXiScript(event.detail.value, "");
+            console.log('sql where clause: ', sSQL);
+        }
+        else if (mode === "qs") {
+            sXiScript = "xi.s|" + fncGetXiScriptQS(event.detail.value, "");
+        }
+        console.log('XIScript: ', sXiScript);
+    })
+
+    var attributes = ["BOIDXIGUID", "BOAttributeIDXIGUID", "FKiOperator", "FKiWhereValue"];
+
+    function fncGetXiScriptQS(rules, sOperator) {
+        var sXiScript = "";
+        var conditions = [];
+        rules.forEach((rule, index) => {
+            var leafConditions = [];
+            var ruleConditions = [];
+            debugger;
+            var ruleConditions = rule.leafRules.map((lr) => {
+                return "{if|{" + lr.find(x => x.attrName.split("_").pop() === "FKiOperator").value + "|'" +
+                    lr.find(x => x.attrName.split("_").pop() === "QSFieldOriginIDXIGUID").key + "','" +
+                    lr.find(x => x.attrName.split("_").pop() === "FKiWhereValue").value + "'}";
+            });
+            debugger
+            var endCol = "";
+
+            if (rule.parentRules.length > 0) {
+                ruleConditions.push("{if|" + fncGetXiScript(rule.parentRules, rule.sRuleOperator));
+            }
+            debugger;
+            ruleConditions.forEach((rc, index) => {
+                debugger
+                if (rule.sRuleOperator === "and") {
+                    if (index === ruleConditions.length - 1) {
+                        sXiScript += rc + ",'true'";
+                    }
+                    else {
+                        sXiScript += rc + ",";
+                    }
+                    endCol = endCol + ",'false'}";
+                }
+                else if (rule.sRuleOperator === "or") {
+                    if (index === ruleConditions.length - 1) {
+                        sXiScript += rc + ",'true','false'}";
+                    }
+                    else {
+                        sXiScript += rc + ",'true',";
+                        endCol += '}';
+                    }
+                }
+            });
+            debugger
+            sXiScript += endCol;
+            conditions.push(sXiScript);
+        });
+        if (conditions.length > 1 && sOperator !== "") {
+            endCol = "";
+            conditions.forEach((c, index) => {
+                debugger
+                if (sOperator === "and") {
+                    if (index === conditions.length - 1) {
+                        sXiScript += c + ",'true'";
+                    }
+                    else {
+                        sXiScript += c;
+                    }
+                    endCol = endCol + ",'false'}";
+                }
+                else if (sOperator === "or") {
+                    if (index === conditions.length - 1) {
+                        sXiScript += c + ",'true','false'}";
+                    }
+                    else {
+                        sXiScript += c + ",'true',";
+                        endCol += '}';
+                    }
+                }
+            });
+            debugger
+            sXiScript += endCol;
+        }
+        debugger
+        return sXiScript;
+    }
+
+    function fncGetXiScript(rules, sOperator) {
+        var sXiScript = "";
+        var conditions = [];
+        rules.forEach((rule, index) => {
+            var leafConditions = [];
+            var ruleConditions = [];
+            debugger;
+            var ruleConditions = rule.leafRules.map((lr) => {
+                return "{if|{" + lr.find(x => x.attrName.split("_").pop() === "FKiOperator").value + "|'" +
+                    lr.find(x => x.attrName.split("_").pop() === "BOIDXIGUID").key + "." + lr.find(x => x.attrName.split("_").pop() === "BOAttributeIDXIGUID").key + "','" +
+                    lr.find(x => x.attrName.split("_").pop() === "FKiWhereValue").value + "'}";
+            });
+            debugger
+            var endCol = "";
+
+            if (rule.parentRules.length > 0) {
+                ruleConditions.push("{if|" + fncGetXiScript(rule.parentRules, rule.sRuleOperator));
+            }
+            debugger;
+            ruleConditions.forEach((rc, index) => {
+                debugger
+                if (rule.sRuleOperator === "and") {
+                    if (index === ruleConditions.length - 1) {
+                        sXiScript += rc + ",'true'";
+                    }
+                    else {
+                        sXiScript += rc + ",";
+                    }
+                    endCol = endCol + ",'false'}";
+                }
+                else if (rule.sRuleOperator === "or") {
+                    if (index === ruleConditions.length - 1) {
+                        sXiScript += rc + ",'true','false'}";
+                    }
+                    else {
+                        sXiScript += rc + ",'true',";
+                        endCol += '}';
+                    }
+                }
+            });
+            debugger
+            sXiScript += endCol;
+            conditions.push(sXiScript);
+        });
+        if (conditions.length > 1 && sOperator !== "") {
+            endCol = "";
+            conditions.forEach((c, index) => {
+                debugger
+                if (sOperator === "and") {
+                    if (index === conditions.length - 1) {
+                        sXiScript += c + ",'true'";
+                    }
+                    else {
+                        sXiScript += c;
+                    }
+                    endCol = endCol + ",'false'}";
+                }
+                else if (sOperator === "or") {
+                    if (index === conditions.length - 1) {
+                        sXiScript += c + ",'true','false'}";
+                    }
+                    else {
+                        sXiScript += c + ",'true',";
+                        endCol += '}';
+                    }
+                }
+            });
+            debugger
+            sXiScript += endCol;
+        }
+        debugger
+        return sXiScript;
+    }
+
+    async function fncGetSQL(rules, sOperator) {
+        var sSQL = "";
+        var conditions = [];
+        var rulePromises = await rules.map(async (rule, index) => {
+            var ruleSQL = "";
+            var ruleConditions = [];
+            if (rule.parentRules.length > 0) {
+                ruleConditions = ruleConditions.concat(await fncGetSQL(rule.parentRules, rule.sRuleOperator));
+            }
+            var leafConditions = [];
+            var leafConditionsPromises = await rule.leafRules.map(async (lr) => {
+                return await lr.reduce(async (accPromise, item) => {
+                    acc = await accPromise;
+                    var attr = item.attrName.split("_").pop();
+                    /*if (attributes.includes(attr)) {*/
+                    if (!item.hidden) {
+                        if (attr === "FKiOperator" && item.value && item.value === "range") {
+                            whereObj = lr.find(x => x.attrName.split("_").pop() === "FKiWhereValue");
+                            if (whereObj && whereObj.value) {
+                                var conditionObject = await $.ajax({
+                                    url: GetRangeDetailsURL,
+                                    type: 'POST',
+                                    contentType: "application/json; charset=utf-8",
+                                    datatype: "json",
+                                    cache: false,
+                                    data: JSON.stringify({ sDetailIDXIGUID: whereObj.value }),
+                                    success: function (data) {
+                                    },
+                                    error: function (data) {
+                                    }
+                                });
+                                var boAttribute = lr.find(x => x.attrName.split("_").pop() === "BOIDXIGUID").key + '.' + lr.find(x => x.attrName.split("_").pop() === "BOAttributeIDXIGUID").key;
+                                var rangeOperator = conditionObject.find(x => x.sName === "sOperator").sValue;
+                                var rangeFromValue = conditionObject.find(x => x.sName === "sFromValue").sValue;
+                                var rangeToValue = conditionObject.find(x => x.sName === "sToValue").sValue;
+                                var condition = rangeOperator === "between" ? boAttribute + ' > ' + rangeFromValue + ' and ' + boAttribute + ' < ' + rangeToValue :
+                                    rangeOperator === '<' ? boAttribute + ' ' + rangeOperator + ' ' + rangeToValue :
+                                        boAttribute + ' ' + rangeOperator + ' ' + rangeFromValue;
+                                return condition;
+                            }
+                        }
+                        else if (attr === "FKiWhereValue" && lr.find(x => x.attrName.split("_").pop() === "FKiOperator").value === "range") {
+                            return acc;
+                        }
+                        else {
+                            var operator = lr.find(x => x.attrName.split("_").pop() === "FKiOperator").value;
+                            acc += attr === "BOAttributeIDXIGUID" ? "." + item.key :
+                                attr === "FKiOperator" ?
+                                    item.value === "contains" || item.value === "starts with" || item.value === "ends with" ? " like " :
+                                    item.value === "not starts with" || item.value === "not ends with" ? " not like " : item.value :
+                                    attr === "FKiWhereValue" && operator === "contains" ? "'%" + item.value + "%'" :
+                                    attr === "FKiWhereValue" && (operator === "starts with" || operator === "not starts with") ? "'" + item.value + "%'" :
+                                    attr === "FKiWhereValue" && (operator === "ends with" || operator === "not ends with") ? "'%" + item.value + "'" : (item.key ?? item.value);
+                            return acc;
+                        }
+                    }
+                    else {
+                        return acc;
+                    }
+                }, Promise.resolve(""));
+            });
+            leafConditions = await Promise.all(leafConditionsPromises);
+            ruleConditions = ruleConditions.concat(leafConditions);
+            ruleSQL = rule.sRuleOperator === 'or' ? '(' + ruleConditions.join(' ' + rule.sRuleOperator + ' ') + ')' : ruleConditions.join(' ' + rule.sRuleOperator + ' ');
+            conditions[index] = ruleSQL;
+            return conditions;
+            //Promise.all(leafConditionsPromises).then((response) => {
+            //    leafConditions = response;
+            //    ruleConditions = ruleConditions.concat(leafConditions);
+            //    ruleSQL = rule.sRuleOperator === 'or' ? '(' + ruleConditions.join(' ' + rule.sRuleOperator + ' ') + ')' : ruleConditions.join(' ' + rule.sRuleOperator + ' ');
+            //    conditions[index] = ruleSQL;
+            //    return conditions;
+            //});
+            //ruleConditions = ruleConditions.concat(leafConditions);
+            //ruleSQL = rule.sRuleOperator === 'or' ? '(' + ruleConditions.join(' ' + rule.sRuleOperator + ' ') + ')' : ruleConditions.join(' ' + rule.sRuleOperator + ' ');
+            //conditions.push(ruleSQL);
+        });
+        responses = await Promise.all(rulePromises);
+        sSQL = sOperator === 'or' ? '(' + conditions.join(' ' + sOperator + ' ') + ')' : conditions.join(' ' + sOperator + ' ');
+        return sSQL;
+        //sSQL = sOperator === 'or' ? '(' + conditions.join(' ' + sOperator + ' ') + ')' : conditions.join(' ' + sOperator + ' ');
+        //return sSQL;
+    }
+
+    function fncUpdateIdToDOM(id, sIdentifier) {
+        var rulesElement = document.querySelector('rules-component').shadowRoot;
+        var rowElement = rulesElement.querySelector('[data-id="' + sIdentifier + '"]');
+        var idElem = rowElement.querySelector("[data-attrname='" + sIdentifier + "_ID" + "']") ?? rowElement.querySelector("[data-attrname='ID']");
+        idElem.value = id;
+    }
+
+    function fncSaveRules(ruleObj) {
+        ruleObj.forEach(rule => {
+            var prefix = rule.hiddenAttributes[0].attrName.split("_")[0];
+            rule.hiddenAttributes.push({
+                attrName: prefix + "_sRuleOperator",
+                value: rule.sRuleOperator,
+            });
+            // save rule and assign the id to hidden Attributes.
+            ruleSaveAttributes = rule.hiddenAttributes.map(att => {
+                return {
+                    sName: att.attrName,
+                    sValue: att.value,
+                    bIsDirty: true,
+                }
+            });
+            debugger
+            fncSaveRulesBO(ruleSaveAttributes, null, null).then((response) => {
+                // check if the rule contains an ID
+                debugger
+                var id = response[0].iInstanceID.toString();
+                fncUpdateIdToDOM(id, prefix);
+                rule.hiddenAttributes.find(att => att.attrName.split("_").pop() === "ID").value = id;
+                if (id) {
+                    // if rule is already saved (contains id) then set the hidden attributes on all the leaf rules
+                    var leafRules = rule.leafRules.flatMap(lr => {
+                        return lr.map(item => {
+                            var attrName = item.attrName.split("_").pop();
+                            if (attrName === "iParentRootID") {
+                                item.value = rule.hiddenAttributes.find(ha => ha.attrName.split("_").pop() === "ID").value;
+                            }
+                            else if (attrName !== "ID" && attrName !== "XIDeleted") {
+                                if (rule.hiddenAttributes.find(ha => ha.attrName.split("_").pop() === attrName)) {
+                                    item.value = rule.hiddenAttributes.find(ha => ha.attrName.split("_").pop() === attrName).value;
+                                }
+                            }
+                            return {
+                                sName: item.attrName,
+                                sValue: item.value,
+                                bIsDirty: true,
+                            };
+                        });
+                    });
+                    var rowIds = leafRules.reduce((acc, item, index) => { if (!acc.some(a => a === item.sName.split("_")[0])) { acc.push(item.sName.split("_")[0]) } return acc; }, []);
+                    // Save leaf rules to DB.
+                    debugger
+                    fncSaveRulesBO(leafRules, null, null).then((response) => {
+                        debugger
+                        // Check parentRules to set hidden attributes.
+                        rowIds.forEach((r, index) => {
+                            fncUpdateIdToDOM(response[index].iInstanceID.toString(), r);
+                        });
+                        var parentRules = rule.parentRules.map(pr => {
+                            return {
+                                ...pr,
+                                hiddenAttributes: pr.hiddenAttributes.map(ha => {
+                                    if (ha.attrName.split("_").pop() === "FKiRuleID" || ha.attrName.split("_").pop() === "FKiRuleIDXIGUID") {
+                                        ha.value = rule.hiddenAttributes.find(att => att.attrName.split("_").pop() === ha.attrName.split("_").pop()).value;
+                                    }
+                                    else if (ha.attrName.split("_").pop() === "iParentRootID") {
+                                        ha.value = rule.hiddenAttributes.find(att => att.attrName.split("_").pop() === "ID").value;
+                                    }
+                                    return ha;
+                                })
+                            }
+                        })
+                        debugger
+                        // call fncSaveRules on each of the parent rules.
+                        fncSaveRules(parentRules);
+                    });
+
+                }
+
+
+            });
+
+
+
+
+        });
+    }
+
+    function fncSaveRulesBO(rulesObj, sGUID, sContext) {
+        return new Promise(function (resolve, reject) {
+            var bIsValid = true;
+            var pvalue = {
+                Attributes: rulesObj,
+                sGUID: sGUID,
+                sContext: sContext,
+                sBOName: "XI Rule Groups",
+                sSaveType: "",
+                sHierarchy: "",
+                oParams: null
+            }
+            if (bIsValid) {
+                $.ajax({
+                    url: SaveGridURL,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    cache: false,
+                    data: JSON.stringify(pvalue),
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (data) {
+                        //alert(data);
+                    }
+                });
+            }
+        });
+    };
+
+</script>

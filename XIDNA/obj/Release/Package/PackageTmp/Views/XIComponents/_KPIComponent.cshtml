@@ -1,0 +1,124 @@
+﻿
+@model XICore.XIIComponent
+@using XISystem
+@using XICore
+@using System.Globalization;
+@{
+    XIDKPI oKPI = null;
+    if (Model.oContent.ContainsKey(XIConstant.KPIComponent))
+    {
+        oKPI = (XIDKPI)Model.oContent[XIConstant.KPIComponent];
+
+    }
+    XIDComponentParam Params = new XIDComponentParam();
+    var NewGUID = Guid.NewGuid();
+}
+<div class="one-layout-kpi mb-5">
+    @if(oKPI!=null)
+    {
+            <div class="row">
+                        <div class="card kpi-card-card">
+                            @if (!string.IsNullOrEmpty(oKPI.sKpiTitle))
+                            {
+                                <div class="card-header">
+                                    <div class="card-title" id="KPItitle_@oKPI.XIGUID">@oKPI.sKpiTitle</div>
+                                </div>
+                            }
+                            <div id="KPI_@oKPI.XIGUID">
+                                @{ var oParams = new List<CNV>();
+                                    oParams.Add(new CNV { sName = "1ClickID", sValue = oKPI.FKi1ClickIDXIGUID.ToString() });
+                                    oParams.Add(new CNV { sName = "sColour", sValue = oKPI.sColors.ToString() });
+                                    oParams.Add(new CNV { sName = "bToolTip", sValue = oKPI.bToolTip.ToString() });
+                                    oParams.Add(new CNV { sName = "bGridLines", sValue = oKPI.bGridLines.ToString() });
+                                    oParams.Add(new CNV { sName = "bIsCursor", sValue = oKPI.bIsCursor.ToString() });
+                                    oParams.Add(new CNV { sName = "bIsLegends", sValue = oKPI.bIsLegends.ToString() });
+                                    oParams.Add(new CNV { sName = "sLegendPosition", sValue = oKPI.sLegendPosition.ToString() });
+                                    //oParams.Add(new CNV { sName = "sKpiTitle", sValue = oKPI.sKpiTitle.ToString() });
+                                    //oParams.Add(new CNV { sName = "RowXilinkID", sValue = oKPI.RowXiLinkID.ToString() });
+                                    oParams.Add(new CNV { sName = "RowXilinkID", sValue = oKPI.RowXiLinkIDXIGUID.ToString() });
+                                    Html.RenderAction("LoadComponentByID", "XIComponents", new { iXIComponentID = oKPI.FKiComponentIDXIGUID, sGUID = NewGUID, nParams = oParams, sName = "", sType = "" });
+                                }
+
+                                <script>
+                                    $(document).ready(function () {
+                                        try {
+                            var Refreshingtype = '@oKPI.iRefreshingType';
+                                            var TimeInterval = '@oKPI.iSetinterval';
+                                                 var oParam = [];
+                                                 var Params = {};
+                                                 Params["sName"] = "1ClickID";
+                                                 Params["sValue"] = '@oKPI.FKi1ClickIDXIGUID';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                                                 Params["sName"] = "sColour";
+                                                 Params["sValue"] = '@oKPI.sColors';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                                                 Params["sName"] = "bToolTip";
+                                                 Params["sValue"] = '@oKPI.bToolTip';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                                                 Params["sName"] = "bGridLines";
+                                                 Params["sValue"] = '@oKPI.bGridLines';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "sSubTitle";
+                                                 Params["sValue"] = '@oKPI.sSubTitle';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "sGroupTitle";
+                                                 Params["sValue"] = '@oKPI.sGroupTitle';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "sKpiTitle";
+                                                 Params["sValue"] = '@oKPI.sKpiTitle';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "bIsCursor";
+                                                 Params["sValue"] = '@oKPI.bIsCursor';
+                                                 oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "bIsLegends";
+                                                 Params["sValue"] = '@oKPI.bIsLegends';
+                            oParam.push(Params);
+                                                 Params = {};
+                            Params["sName"] = "sLegendPosition";
+                                                 Params["sValue"] = '@oKPI.sLegendPosition';
+                            oParam.push(Params);
+                                                if (TimeInterval > 0 && Refreshingtype == 10) {
+                                                    setInterval(function () {
+                                                        ResultForKPIandInbox('@oKPI.FKiComponentIDXIGUID', '@NewGUID', oParam,'@oKPI.XIGUID');
+                                                    }, TimeInterval);
+                                            }
+                            if (Refreshingtype == 20)
+                            {
+                                    console.log("KPI's  is calling");
+                                    $.ajax({
+                                        type: 'POST',
+                                        contentType: 'application/json; charset=utf-8',
+                                        url: '@Url.Action("KPIData", "XiSignalR")',
+                                        datatype: 'json',
+                                        cache: false,
+                                        async: true,
+                                        data: JSON.stringify({ i1ClickID: '@oKPI.FKi1ClickIDXIGUID', KPIID: '@oKPI.XIGUID', iXIComponentID: '@oKPI.FKiComponentIDXIGUID', oParam }),
+                                        success: function (data) {
+
+                                        }
+
+                                    });
+                                        }
+                                    }
+                                catch (err) {
+                                        console.error("Error in KPI loading" + err.message);
+                                    }
+                                });
+
+                                </script>
+                            </div>
+                        </div>
+             </div> 
+    }
+</div>
+
+
+

@@ -1,0 +1,11 @@
+C:\Mounika\GIT\BC\XIScript\bin\Release\ApplicationInsights.config
+C:\Mounika\GIT\BC\XIScript\bin\Release\XIScript.dll
+C:\Mounika\GIT\BC\XIScript\bin\Release\XIScript.pdb
+C:\Mounika\GIT\BC\XIScript\bin\Release\XISystem.dll
+C:\Mounika\GIT\BC\XIScript\bin\Release\XISystem.pdb
+C:\Mounika\GIT\BC\XIScript\bin\Release\XISystem.dll.config
+C:\Mounika\GIT\BC\XIScript\obj\Release\XIScript.csproj.AssemblyReference.cache
+C:\Mounika\GIT\BC\XIScript\obj\Release\XIScript.csproj.CoreCompileInputs.cache
+C:\Mounika\GIT\BC\XIScript\obj\Release\XIScript.csproj.CopyComplete
+C:\Mounika\GIT\BC\XIScript\obj\Release\XIScript.dll
+C:\Mounika\GIT\BC\XIScript\obj\Release\XIScript.pdb

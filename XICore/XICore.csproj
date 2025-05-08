@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7F79227C-4317-4A22-94C1-949DDD7F5A7D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XICore</RootNamespace>
+    <AssemblyName>XICore</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BitMiracle.LibTiff.NET, Version=2.4.649.0, Culture=neutral, PublicKeyToken=53879b3e20e7a7d6, processorArchitecture=MSIL">
+      <HintPath>..\packages\BitMiracle.LibTiff.NET.2.4.649\lib\net40\BitMiracle.LibTiff.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Excel.1.0.0\lib\dotnet\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPdf">
+      <HintPath>..\packages\IronPdf.4.4.9\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="IronSoftware.Drawing.Common, Version=2023.7.1.0, Culture=neutral, PublicKeyToken=8d7e55c97b3e9835, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronSoftware.System.Drawing.2023.7.1\lib\netstandard2.0\IronSoftware.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.svg.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.3.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.3.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfoExtended, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.ConnectionInfoExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.Smo.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlClrProvider, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=13.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MongoDB.Bson.2.11.4\lib\net452\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.24.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.24.1\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.ImageSharp.2.1.3\lib\net472\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>..\packages\starkbank-ecdsa.1.3.1\lib\net452\StarkbankEcdsa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Algo_Examples\CreateIF_Algo.txt" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\BCNetwork.cs" />
+    <Compile Include="Class\CCIFNode.cs" />
+    <Compile Include="Class\ExecutionEngine.cs" />
+    <Compile Include="Class\SignalRUtils.cs" />
+    <Compile Include="Class\XI1QueryAttributeDetails.cs" />
+    <Compile Include="Class\XIBODefaultDashboard.cs" />
+    <Compile Include="Class\XICommunicationI.cs" />
+    <Compile Include="Class\XIDAccount.cs" />
+    <Compile Include="Class\XIDAlgorithm.cs" />
+    <Compile Include="Class\XIDAttribute.cs" />
+    <Compile Include="Class\XIDBOAspect.cs" />
+    <Compile Include="Class\XIDDistribute.cs" />
+    <Compile Include="Class\XIDFormat.cs" />
+    <Compile Include="Class\XIDKPI.cs" />
+    <Compile Include="Class\XIDRoleDashboard.cs" />
+    <Compile Include="Class\XIDRule.cs" />
+    <Compile Include="Class\XIDWidget.cs" />
+    <Compile Include="Class\XIEnvironmentTemplate.cs" />
+    <Compile Include="Class\XIInfraHierarchy.cs" />
+    <Compile Include="Class\XIInfraTeams.cs" />
+    <Compile Include="Class\XIInfraUserSetting.cs" />
+    <Compile Include="Class\XIKPICircle.cs" />
+    <Compile Include="Class\XILabel.cs" />
+    <Compile Include="Class\XIMatrix.cs" />
+    <Compile Include="Class\XIPerformance.cs" />
+    <Compile Include="Class\XIQuoteReportData.cs" />
+    <Compile Include="Class\XIAssignMenu.cs" />
+    <Compile Include="Class\XIConfigs.cs" />
+    <Compile Include="Class\XID1ClickAction.cs" />
+    <Compile Include="Class\XIDBOAction.cs" />
+    <Compile Include="Class\XIDPartialQS.cs" />
+    <Compile Include="Class\XIDQSSection.cs" />
+    <Compile Include="Class\XIDQSStep.cs" />
+    <Compile Include="Class\XIGraphData.cs" />
+    <Compile Include="Class\QueryEngine.cs" />
+    <Compile Include="Class\XI1ClickSummary.cs" />
+    <Compile Include="Class\XIAPI.cs" />
+    <Compile Include="Class\XIBODisplay.cs" />
+    <Compile Include="Class\XIConstants.cs" />
+    <Compile Include="Class\XIContentEditors.cs" />
+    <Compile Include="Class\XICoreCache.cs" />
+    <Compile Include="Class\XID1Click.cs" />
+    <Compile Include="Class\XID1ClickLink.cs" />
+    <Compile Include="Class\XID1ClickParameter.cs" />
+    <Compile Include="Class\XID1ClickPermission.cs" />
+    <Compile Include="Class\XID1ClickScripts.cs" />
+    <Compile Include="Class\XIDApplication.cs" />
+    <Compile Include="Class\XIDataSource.cs" />
+    <Compile Include="Class\XIDBO.cs" />
+    <Compile Include="Class\XIDBODefault.cs" />
+    <Compile Include="Class\XIDBOGUID.cs" />
+    <Compile Include="Class\XIDBOUI.cs" />
+    <Compile Include="Class\XIDClass.cs" />
+    <Compile Include="Class\XIDComponent.cs" />
+    <Compile Include="Class\XIDDataType.cs" />
+    <Compile Include="Class\XIDDialog.cs" />
+    <Compile Include="Class\XIDefinitionBase.cs" />
+    <Compile Include="Class\XIDFieldDefintion.cs" />
+    <Compile Include="Class\XIDFieldOptionList.cs" />
+    <Compile Include="Class\XIDFieldOrigin.cs" />
+    <Compile Include="Class\XIDGroup.cs" />
+    <Compile Include="Class\XIDInbox.cs" />
+    <Compile Include="Class\XIDLayout.cs" />
+    <Compile Include="Class\XIDLayoutDetails.cs" />
+    <Compile Include="Class\XIDLayoutMapping.cs" />
+    <Compile Include="Class\XIDPopup.cs" />
+    <Compile Include="Class\XIIComponent.cs" />
+    <Compile Include="Class\XIInfraActors.cs" />
+    <Compile Include="Class\XIInfraActorsMapping.cs" />
+    <Compile Include="Class\XIMenu.cs" />
+    <Compile Include="Class\XIQSLinkDefintion.cs" />
+    <Compile Include="Class\XIDMasterData.cs" />
+    <Compile Include="Class\XIDOptionList.cs" />
+    <Compile Include="Class\XIDOrganisation.cs" />
+    <Compile Include="Class\XIDQS.cs" />
+    <Compile Include="Class\XIDQSStepNavigations.cs" />
+    <Compile Include="Class\XIDropDown.cs" />
+    <Compile Include="Class\XIDScript.cs" />
+    <Compile Include="Class\XIDScriptResult.cs" />
+    <Compile Include="Class\XIDStructure.cs" />
+    <Compile Include="Class\XIDValue.cs" />
+    <Compile Include="Class\XIDXI.cs" />
+    <Compile Include="Class\XIEncryption.cs" />
+    <Compile Include="Class\XIErrorLogs.cs" />
+    <Compile Include="Class\XIExampleUsage.cs" />
+    <Compile Include="Class\XIFunctions.cs" />
+    <Compile Include="Class\XII1Click.cs" />
+    <Compile Include="Class\XIIApplication.cs" />
+    <Compile Include="Class\XIIAttribute.cs" />
+    <Compile Include="Class\XIIBO.cs" />
+    <Compile Include="Class\XIIBOUI.cs" />
+    <Compile Include="Class\XIIClassAttr.cs" />
+    <Compile Include="Class\XIIGroup.cs" />
+    <Compile Include="Class\XIILink.cs" />
+    <Compile Include="Class\XIINameValuePairs.cs" />
+    <Compile Include="Class\XIInstanceBase.cs" />
+    <Compile Include="Class\XIIOServerDetails.cs" />
+    <Compile Include="Class\XIIQS.cs" />
+    <Compile Include="Class\XIIQSSection.cs" />
+    <Compile Include="Class\XIIQSStep.cs" />
+    <Compile Include="Class\XIIScript.cs" />
+    <Compile Include="Class\XIIStructure.cs" />
+    <Compile Include="Class\XIIValue.cs" />
+    <Compile Include="Class\XIIXI.cs" />
+    <Compile Include="Class\XIPostCodeLookUp.cs" />
+    <Compile Include="Class\XIQSScripts.cs" />
+    <Compile Include="Class\XIQSLink.cs" />
+    <Compile Include="Class\XIReports.cs" />
+    <Compile Include="Class\XIRoleMenu.cs" />
+    <Compile Include="Class\XISendGridEvents.cs" />
+    <Compile Include="Class\XISignalRsettings.cs" />
+    <Compile Include="Class\XISingleton.cs" />
+    <Compile Include="Class\XIStructNodeI.cs" />
+    <Compile Include="Class\XICoreDBContext.cs" />
+    <Compile Include="Class\XILink.cs" />
+    <Compile Include="Class\XIParameter.cs" />
+    <Compile Include="Class\XIQSVisualisation.cs" />
+    <Compile Include="Class\XIURLMappings.cs" />
+    <Compile Include="Class\XIVisualisation.cs" />
+    <Compile Include="Class\ProtectedObject.cs" />
+    <Compile Include="DataBaseCompare\jQueryDataTableParamModels.cs" />
+    <Compile Include="DataBaseCompare\VMDTResponses.cs" />
+    <Compile Include="DataBaseCompare\XIDatabaseInfo.cs" />
+    <Compile Include="DataBaseCompare\XIDatabaseSchema.cs" />
+    <Compile Include="DataBaseCompare\XITableColumns.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4FunnelComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraCampaign.cs" />
+    <Compile Include="Infrastructure\XIInfraKPIGroupingComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraRoleDashBoardComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraUserPreference.cs" />
+    <Compile Include="Infrastructure\XIBOBuilding.cs" />
+    <Compile Include="Infrastructure\XICacheInstance.cs" />
+    <Compile Include="Infrastructure\XIInfraAccordionComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAccountComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4BarChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4ColumnBarChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4ColumnLineChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4GaugeChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4HeatChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4LineChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4MultiBarChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4MultiBarwithLineChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4PieChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4PriceChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraAM4SemiPieChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraApplicationComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraCache.cs" />
+    <Compile Include="Infrastructure\XIInfraCacheAPI.cs" />
+    <Compile Include="Infrastructure\XIInfraCheckboxComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraCodeEditorComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraCombinationChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraCommunicationComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDailerComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDashBoardChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDataTypeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDbContext.cs" />
+    <Compile Include="Infrastructure\XIInfraDialogComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDirectAPI.cs" />
+    <Compile Include="Infrastructure\XIInfraDistributionComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDocs.cs" />
+    <Compile Include="Infrastructure\XIInfraDocTypes.cs" />
+    <Compile Include="Infrastructure\XIInfraDocumentComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDocumentTreeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraDropDown.cs" />
+    <Compile Include="Infrastructure\XIInfraDynamicTreeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraEmail.cs" />
+    <Compile Include="Infrastructure\XIInfraEncryption.cs" />
+    <Compile Include="Infrastructure\XIInfraFieldOriginComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraFormComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraGaugeChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraGridComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraGroupComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraHTMLBasicComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraHtmlComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraImportComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraInboxComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraKPICircleComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraKPIComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraLayoutComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraLayoutDetailsComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraLayoutMappingComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraMappingComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraMenuComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraMenuNodeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraMultiRowComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraNotifications.cs" />
+    <Compile Include="Infrastructure\XIInfraOneClickComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraPayment.cs" />
+    <Compile Include="Infrastructure\XIInfraPieChartComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSConfigComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSLinkComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSLinkDefinitionComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSSectionConfigComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQSStepConfigComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQueryManagementComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQuestionSetComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraQuoteReportDataComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraRepeaterComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraReportComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraRoles.cs" />
+    <Compile Include="Infrastructure\XIInfraRulesComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraScript.cs" />
+    <Compile Include="Infrastructure\XIInfraScriptComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraSendGridComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraSmartSearchComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraStepComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraStructureTreeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraTabComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraUrlMappingComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraUserCreationComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraUserRoles.cs" />
+    <Compile Include="Infrastructure\XIInfraUsers.cs" />
+    <Compile Include="Infrastructure\XIInfraVisualisationComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIBOAttributeComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIBOComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIBOScriptComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIBOStructureComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIBOUIDetailsComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIComponentComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIDataSounceComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXILinkComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIParameterComponent.cs" />
+    <Compile Include="Infrastructure\XIInfraXIValuesComponent.cs" />
+    <Compile Include="Infrastructure\XINameValuePairs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Script\BOInstanceGridPlaceholder.cs" />
+    <Compile Include="Script\CAlgorithmDefinition.cs" />
+    <Compile Include="Script\CAlgorithmInstance.cs" />
+    <Compile Include="Script\CBOPlaceholder.cs" />
+    <Compile Include="Script\CCodeLine.cs" />
+    <Compile Include="Script\CMethodStepDefinition.cs" />
+    <Compile Include="Script\CMethodStepInstance.cs" />
+    <Compile Include="Script\CNodeItem.cs" />
+    <Compile Include="Script\CScriptController.cs" />
+    <Compile Include="Script\CXIAPI.cs" />
+    <Compile Include="Script\CXICorePlaceholder.cs" />
+    <Compile Include="Script\mGlobals.cs" />
+    <Compile Include="Script\XIScriptEnum.cs" />
+    <Compile Include="Class\XIDSource.cs" />
+    <Compile Include="XIDSendGridTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XIDataBase\XIDataBase.csproj">
+      <Project>{33e344fc-9054-4e70-854f-c3f3499302eb}</Project>
+      <Name>XIDataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XISystem\XISystem.csproj">
+      <Project>{dd0f62d0-3ed4-4568-945e-266c372a2ba5}</Project>
+      <Name>XISystem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57909</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:57909/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
